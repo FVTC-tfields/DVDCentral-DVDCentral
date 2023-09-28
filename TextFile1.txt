@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=(localdb)\MSSQLLocalDB;Database=TSF.DVDCentral.DB;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -Context DVDCentralEntities -UseDatabaseNames -force

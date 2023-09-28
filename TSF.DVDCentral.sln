@@ -3,9 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.BL.Models", "TSF.DVDCentral.BL.Models\TSF.DVDCentral.BL.Models.csproj", "{6284AF76-20A9-4775-BFA5-A140A7486349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.BL.Models", "TSF.DVDCentral.BL.Models\TSF.DVDCentral.BL.Models.csproj", "{6284AF76-20A9-4775-BFA5-A140A7486349}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TSF.DVDCentral.DB", "TSF.DVDCentral.DB\TSF.DVDCentral.DB.sqlproj", "{5956CD21-88A7-46C3-845E-BB9292382C92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.PL", "TSF.DVDCentral.PL\TSF.DVDCentral.PL.csproj", "{2E5A1D95-9DAD-41E3-B85E-E310A01C9689}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFC20497-0D1E-41AA-8E61-5445071FD548}"
+	ProjectSection(SolutionItems) = preProject
+		TextFile1.txt = TextFile1.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.PL.Test", "TSF.DVDCentral.PL.Test\TSF.DVDCentral.PL.Test.csproj", "{0040461E-74F7-461B-9F97-63192D5EA565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.BL", "TSF.DVDCentral.BL\TSF.DVDCentral.BL.csproj", "{4CDC26CE-FC6C-4D44-BA70-BC4597A81016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.BL.Test", "TSF.DVDCentral.BL.Test\TSF.DVDCentral.BL.Test.csproj", "{CBF508A5-A498-4C4A-AE81-F11F8B7D27B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +36,22 @@ Global
 		{5956CD21-88A7-46C3-845E-BB9292382C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5956CD21-88A7-46C3-845E-BB9292382C92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5956CD21-88A7-46C3-845E-BB9292382C92}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2E5A1D95-9DAD-41E3-B85E-E310A01C9689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5A1D95-9DAD-41E3-B85E-E310A01C9689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5A1D95-9DAD-41E3-B85E-E310A01C9689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5A1D95-9DAD-41E3-B85E-E310A01C9689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0040461E-74F7-461B-9F97-63192D5EA565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0040461E-74F7-461B-9F97-63192D5EA565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0040461E-74F7-461B-9F97-63192D5EA565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0040461E-74F7-461B-9F97-63192D5EA565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CDC26CE-FC6C-4D44-BA70-BC4597A81016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CDC26CE-FC6C-4D44-BA70-BC4597A81016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CDC26CE-FC6C-4D44-BA70-BC4597A81016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CDC26CE-FC6C-4D44-BA70-BC4597A81016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF508A5-A498-4C4A-AE81-F11F8B7D27B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF508A5-A498-4C4A-AE81-F11F8B7D27B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF508A5-A498-4C4A-AE81-F11F8B7D27B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF508A5-A498-4C4A-AE81-F11F8B7D27B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
