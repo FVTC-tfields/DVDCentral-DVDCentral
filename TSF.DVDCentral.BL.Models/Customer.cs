@@ -9,12 +9,13 @@ namespace TSF.DVDCentral.BL.Models
     public class Customer
     {
         public int Id { get; set; }
-        public string? Description { get; set; }
-        public int FormatId { get; set; }
-        public int DirectorId { get; set; }
-        public int RatingId { get; set; }
-        public float Cost { get; set; }
-        public int InStkQty { get; set; }
-        public string? ImagePath { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public int UserId { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? ZIP { get; set; }
+        public string? Phone { get; set; }
     }
 }
