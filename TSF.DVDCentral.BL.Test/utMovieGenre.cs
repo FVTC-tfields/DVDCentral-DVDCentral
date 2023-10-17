@@ -15,24 +15,9 @@ namespace TSF.DVDCentral.BL.Test
         }
 
         [TestMethod]
-        public void InsertTest2()
-        {
-            int id = 0;
-            MovieGenre moviegenre = new MovieGenre
-            {
-                Description = "Test"
-            };
-
-            int results = MovieGenreManager.Insert(moviegenre, true);
-            Assert.AreEqual(1, results);
-        }
-
-        [TestMethod]
         public void UpdateTest()
         {
-            MovieGenre moviegenre = MovieGenreManager.LoadById(3);
-            moviegenre.Description = "Test";
-            int results = MovieGenreManager.Update(moviegenre, true);
+            int results = MovieGenreManager.Update(3, 1, 1, true);
             Assert.AreEqual(1, results);
         }
 

@@ -17,7 +17,7 @@ namespace TSF.DVDCentral.BL.Test
         public void InsertTest1()
         {
             int id = 0;
-            int results = CustomerManager.Insert("Test", "Test", ref id, 0, "Test", "Test", "Test", "Test", "Test", true);
+            int results = CustomerManager.Insert("Test", "Test", ref id, 0, "Test", "Test", "NO", "Test", "Test", true);
             Assert.AreEqual(1, results);
         }
 
@@ -32,7 +32,7 @@ namespace TSF.DVDCentral.BL.Test
                 UserId = 33333,
                 Address = "Test",
                 City = "Test",
-                State = "Test",
+                State = "SI",
                 ZIP = "Test",
                 Phone = "Test"
             };
@@ -50,7 +50,7 @@ namespace TSF.DVDCentral.BL.Test
             customer.UserId = 33333;
             customer.Address = "Test";
             customer.City = "Test";
-            customer.State = "Test";
+            customer.State = "NO";
             customer.ZIP = "Test";
             customer.Phone = "1234567890";
             int results = CustomerManager.Update(customer, true);
@@ -69,7 +69,7 @@ namespace TSF.DVDCentral.BL.Test
         {
 
             Customer customer = CustomerManager.LoadById(3);
-            Assert.AreEqual(1, customer.Id);
+            Assert.AreEqual(3, customer.Id);
         }
     }
 }
