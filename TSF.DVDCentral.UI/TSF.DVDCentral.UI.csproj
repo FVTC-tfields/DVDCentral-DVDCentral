@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TSF.DVDCentral.BL.Models\TSF.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TSF.DVDCentral.BL\TSF.DVDCentral.BL.csproj" />
   </ItemGroup>

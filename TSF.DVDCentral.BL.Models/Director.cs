@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,14 @@ namespace TSF.DVDCentral.BL.Models
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+
+        public string? FullName 
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
+
     }
 }

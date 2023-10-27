@@ -52,27 +52,31 @@ namespace TSF.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
                     tblOrder entity = new tblOrder();
-
-                    //if(dc.tblOrders.Any())
-                    //{
-                    //    entity.Id = dc.tblOrders.Max(s => s.Id) + 1;
-                    //}
-                    //else
-                    //{
-                    //    entity.Id = 1;
-                    //}
-
                     entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
                     entity.CustomerId = order.CustomerId;
                     entity.OrderDate = DateTime.Now;
                     entity.ShipDate = DateTime.Now;
                     entity.UserId = order.UserId;
+                    dc.tblOrders.Add(entity);
 
+                    var orderItemId = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                    foreach (var orderItem in order.OrderItems) 
+                    { 
+                        tblOrderItem entityItem = new tblOrderItem();
+                        entityItem.Id = orderItemId;
+                        entityItem.OrderId = entity.Id;
+                        entityItem.MovieId = orderItem.MovieId;
+                        entityItem.Quantity = orderItem.Quantity;
+                        entityItem.Cost = orderItem.Cost;
+                        dc.tblOrderItems.Add(entityItem);
+
+                        orderItem.OrderId = entity.Id;
+                        orderItemId++;
+                    }
 
                     // IMPORTANT - BACK FILL THE ID
                     order.Id = entity.Id;
 
-                    dc.tblOrders.Add(entity);
                     results = dc.SaveChanges();
 
                     if (rollback) transaction.Rollback();
@@ -175,8 +179,8 @@ namespace TSF.DVDCentral.BL
                             CustomerId = entity.CustomerId,
                             OrderDate = entity.OrderDate,
                             ShipDate = entity.ShipDate,
-                            UserId = entity.UserId
-
+                            UserId = entity.UserId,
+                            OrderItems = OrderItemManager.LoadByOrderId(id)
                         };
                     }
                     else
@@ -193,7 +197,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load()
+        public static List<Order> Load(int? customerId = null)
         {
             try
             {
@@ -202,6 +206,7 @@ namespace TSF.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from s in dc.tblOrders
+                     where s.CustomerId == customerId || customerId == null
                      select new
                      {
                          s.Id,
