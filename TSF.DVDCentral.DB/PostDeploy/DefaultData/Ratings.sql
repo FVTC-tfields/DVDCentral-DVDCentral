@@ -1,7 +1,7 @@
 ﻿BEGIN
 	INSERT INTO tblRating (Id, Description)
 	VALUES
-	(123, 'G'),
-	(234, 'G'),
-	(345, 'G')
+	(1, 'G'),
+	(2, 'PG-13'),
+	(3, 'R')
 END

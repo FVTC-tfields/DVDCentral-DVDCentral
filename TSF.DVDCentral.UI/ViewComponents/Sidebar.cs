@@ -18,5 +18,10 @@ namespace TSF.DVDCentral.UI.ViewComponents
 
             return View(data);
         }
+
+        //public IViewComponentResult Invoke()
+        //{
+        //    return View(GenreManager.Load().OrderBy(p => p.Description));
+        //}
     }
 }

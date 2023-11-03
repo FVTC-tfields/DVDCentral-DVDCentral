@@ -1,7 +1,7 @@
 ﻿BEGIN
 	INSERT INTO tblFormat (Id, Description)
 	VALUES
-	(123, 'Digital'),
-	(234, 'Digital'),
-	(345, 'Digital')
+	(1, 'Digital'),
+	(2, 'Blue-Ray'),
+	(3, 'VHS')
 END

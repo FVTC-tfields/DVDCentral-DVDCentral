@@ -3,5 +3,5 @@
 	VALUES
 	(1, 'Comedy/Sport'),
 	(2, 'Family/Comedy'),
-	(3, 'Comedy/Sport')
+	(3, 'Horror')
 END
