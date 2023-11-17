@@ -18,7 +18,7 @@ namespace TSF.DVDCentral.BL.Models
         public string? LastName { get; set; }
         public string? Password { get; set; }
         [DisplayName("Full Name")]
-        public string FullName { get { return FullName + " " + LastName; } }
+        public string FullName { get { return FirstName + " " + LastName; } }
 
     }
 }
