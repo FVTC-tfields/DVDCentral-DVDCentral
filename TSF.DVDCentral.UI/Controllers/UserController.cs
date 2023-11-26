@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TSF.DVDCentral.BL;
 using TSF.DVDCentral.BL.Models;
+using TSF.DVDCentral.PL;
 using TSF.DVDCentral.UI.Extensions;
 
 namespace TSF.DVDCentral.UI.Controllers
@@ -34,6 +35,26 @@ namespace TSF.DVDCentral.UI.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            try
+            {
+                int result = UserManager.Insert(user);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public IActionResult Logout()
         {
             ViewBag.Title = "Logout";
@@ -59,7 +80,7 @@ namespace TSF.DVDCentral.UI.Controllers
                 if (TempData["returnUrl"] != null)
                     return Redirect(TempData["returnUrl"]?.ToString());
 
-                return RedirectToAction(nameof(Index), "Declaration");
+                return RedirectToAction(nameof(Index), "Home");
             }
             catch (Exception ex)
             {
@@ -68,5 +89,26 @@ namespace TSF.DVDCentral.UI.Controllers
                 return View(user);
             }
         }
+
+        public IActionResult Edit(int id)
+        {
+            return View(UserManager.LoadById(id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, User user, bool rollback = false)
+        {
+            try
+            {
+                int result = UserManager.Update(user);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(user);
+            }
+        }
+        
     }
 }

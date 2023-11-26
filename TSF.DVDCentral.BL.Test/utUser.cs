@@ -26,6 +26,12 @@ namespace TSF.ProgDec.BL.Test
         }
 
         [TestMethod]
+        public void LoadTest()
+        {
+            Assert.AreEqual(2, UserManager.Load().Count);
+        }
+
+        [TestMethod]
         public void LoginFailureNoUserId()
         {
             try

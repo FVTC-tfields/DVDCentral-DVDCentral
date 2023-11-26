@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TSF.DVDCentral.UI.styles.css" asp-append-version="true" />
+
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    @* <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" asp-append-version="true" />
+    *@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
 </head>
 <body>
     <header>
@@ -43,6 +51,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Rating" asp-action="Index">Ratings</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Index">User</a>
+                        </li>
+                        @{
+                        if (TSF.DVDCentral.UI.Models.Authenticate.IsAuthenticated(Context))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -69,6 +94,11 @@
                 </div>
             </div>
 
+            <div id="overlay" onclick="off()">
+                <div id="imageproplarge">
+                    <img class="imageproplarge" id="output" />
+                </div>
+            </div>
 
             <div class="col-md-9 main body-content rounded-top">
                 <div class="header rounded-top p-1">
@@ -93,3 +123,15 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script type="text/javascript">
+    function off() {
+        console.log('Off');
+        document.getElementById("overlay").style.display = "none";
+    }
+    function on(picture) {
+        console.log('On');
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("output").src = picture;
+    }
+</script>

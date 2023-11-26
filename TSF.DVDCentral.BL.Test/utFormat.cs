@@ -36,7 +36,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            Format format = FormatManager.LoadById(345);
+            Format format = FormatManager.LoadById(3);
             format.Description = "Test";
             int results = FormatManager.Update(format, true);
             Assert.AreEqual(1, results);
@@ -45,7 +45,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            int results = FormatManager.Delete(345, true);
+            int results = FormatManager.Delete(3, true);
             Assert.AreEqual(1, results);
         }
     }
