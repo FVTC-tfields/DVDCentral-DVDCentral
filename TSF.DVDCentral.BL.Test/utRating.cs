@@ -36,7 +36,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            Rating rating = RatingManager.LoadById(3);
+            Rating rating = RatingManager.LoadById(345);
             rating.Description = "Test";
             int results = RatingManager.Update(rating, true);
             Assert.AreEqual(1, results);
@@ -45,7 +45,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            int results = RatingManager.Delete(3, true);
+            int results = RatingManager.Delete(345, true);
             Assert.AreEqual(1, results);
         }
     }

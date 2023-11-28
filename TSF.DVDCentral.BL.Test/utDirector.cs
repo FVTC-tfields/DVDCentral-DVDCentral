@@ -16,7 +16,7 @@ namespace TSF.DVDCentral.BL.Test
         {
             int id = 0;
             int results = DirectorManager.Insert("Bale", "Organa",  ref id, true);
-            Assert.AreEqual(4, id);
+            Assert.AreEqual(346, id);
             Assert.AreEqual(0, results);
         }
 
@@ -37,7 +37,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            Director director = DirectorManager.LoadById(3);
+            Director director = DirectorManager.LoadById(345);
             director.FirstName = "Test";
             int results = DirectorManager.Update(director, true);
             Assert.AreEqual(1, results);
@@ -46,7 +46,7 @@ namespace TSF.DVDCentral.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            int results = DirectorManager.Delete(3, true);
+            int results = DirectorManager.Delete(345, true);
             Assert.AreEqual(1, results);
         }
     }

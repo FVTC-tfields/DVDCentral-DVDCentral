@@ -65,7 +65,7 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblDirectors where id = 345
-            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 3).FirstOrDefault();
+            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 345).FirstOrDefault();
 
             dc.tblDirectors.Remove(entity);
             int result = dc.SaveChanges(true);
@@ -77,8 +77,8 @@ namespace TSF.DVDCentral.PL.Test
         public void LoadByIdTest()
         {
             // Select * from tblDirector where id = 4
-            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 3).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 3);
+            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 345).FirstOrDefault();
+            Assert.AreEqual(entity.Id, 345);
         }
     }
 }

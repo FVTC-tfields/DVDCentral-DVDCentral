@@ -162,7 +162,7 @@ namespace TSF.DVDCentral.BL
                         return new Rating
                         {
                             Id = entity.Id,
-                            Description = entity.Description
+                            Description = entity.Description,
 
                         };
                     }

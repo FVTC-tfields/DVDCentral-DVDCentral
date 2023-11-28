@@ -66,8 +66,8 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblRatings where id = 3
-            tblRating entity = dc.tblRatings.Where(e => e.Id == 3).FirstOrDefault();
+            // Select * from tblRatings where id = 345
+            tblRating entity = dc.tblRatings.Where(e => e.Id == 345).FirstOrDefault();
 
             dc.tblRatings.Remove(entity);
             int result = dc.SaveChanges(true);
@@ -78,9 +78,9 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void LoadByIdTest()
         {
-            // Select * from tblRating where id = 3
-            tblRating entity = dc.tblRatings.Where(e => e.Id == 3).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 3);
+            // Select * from tblRating where id = 345
+            tblRating entity = dc.tblRatings.Where(e => e.Id == 345).FirstOrDefault();
+            Assert.AreEqual(entity.Id, 345);
         }
     }
 }

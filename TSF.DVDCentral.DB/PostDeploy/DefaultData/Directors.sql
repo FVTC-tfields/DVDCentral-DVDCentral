@@ -3,5 +3,5 @@
 	VALUES
 	(1, 'John', 'Lasseter'),
 	(2, 'Tyler', 'Fields'),
-	(3, 'Brian', 'Foote')
+	(3, 'Brian', 'Fee')
 END
