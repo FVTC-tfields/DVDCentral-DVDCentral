@@ -64,6 +64,7 @@ namespace TSF.DVDCentral.BL
                     tblUser entity = new tblUser();
 
                     entity.Id = dc.tblUsers.Any() ? dc.tblCustomers.Max(s => s.Id) + 1 : 1;
+                    entity.UserName = user.UserName;
                     entity.FirstName = user.FirstName;
                     entity.LastName = user.LastName;
                     entity.UserId = user.UserId;
@@ -149,6 +150,7 @@ namespace TSF.DVDCentral.BL
                     User user = new User
                     {
                         UserId = "bfoote",
+                        UserName = "bfoote",
                         FirstName = "Brian",
                         LastName = "Foote",
                         Password = "maple"
@@ -158,6 +160,7 @@ namespace TSF.DVDCentral.BL
                     user = new User
                     {
                         UserId = "tfields",
+                        UserName = "tfields",
                         FirstName = "Tyler",
                         LastName = "Fields",
                         Password = "larry"

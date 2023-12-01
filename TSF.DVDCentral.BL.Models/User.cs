@@ -13,6 +13,8 @@ namespace TSF.DVDCentral.BL.Models
 
         [DisplayName("User Id")]
         public string UserId { get; set; }
+
+        public string UserName { get; set; }
         
         [DisplayName("First Name")]
         public string? FirstName { get; set; }
