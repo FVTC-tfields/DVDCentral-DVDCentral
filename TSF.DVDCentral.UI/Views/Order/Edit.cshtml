@@ -34,6 +34,15 @@
                 <span asp-validation-for="UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="OrderItems" class="control-label"></label>
+                <select asp-for="OrderItems"
+                        class="form-control"
+                        multiple
+                        asp-items="@(new MultiSelectList(Model.OrderItems, "Id", "OrderId", "Quantity", "MovieId"))">
+                </select>
+                <span asp-validation-for="OrderItems" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -42,6 +51,10 @@
 
 <div class="m-2">
     <a asp-action="Index">Back to List</a>
+</div>
+
+<div>
+    <partial name="_OrderPartial" model="Model.OrderItems" />
 </div>
 
 @section Scripts {

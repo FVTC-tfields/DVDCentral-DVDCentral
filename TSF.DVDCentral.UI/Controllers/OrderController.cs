@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TSF.DVDCentral.BL.Models;
 using TSF.DVDCentral.BL;
+using Microsoft.AspNetCore.Http.Extensions;
+using TSF.DVDCentral.UI.Models;
 
 namespace TSF.DVDCentral.UI.Controllers
 {
@@ -18,7 +20,11 @@ namespace TSF.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            ViewBag.Title = "Create a Order";
+            if (Authenticate.IsAuthenticated(HttpContext))
+                return View();
+            else
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
         }
 
         [HttpPost]
@@ -38,7 +44,11 @@ namespace TSF.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View(RatingManager.LoadById(id));
+            ViewBag.Title = "Edit a Program";
+            if (Authenticate.IsAuthenticated(HttpContext))
+                return View(RatingManager.LoadById(id));
+            else
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
         }
 
         [HttpPost]

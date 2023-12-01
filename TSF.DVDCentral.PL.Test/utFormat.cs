@@ -68,7 +68,7 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblFormats where id = 345
-            tblFormat entity = dc.tblFormats.Where(e => e.Id == 345).FirstOrDefault();
+            tblFormat entity = dc.tblFormats.Where(e => e.Id == 3).FirstOrDefault();
 
             dc.tblFormats.Remove(entity);
             int result = dc.SaveChanges(true);
@@ -80,8 +80,8 @@ namespace TSF.DVDCentral.PL.Test
         public void LoadByIdTest()
         {
             // Select * from tblFormat where id = 345
-            tblFormat entity = dc.tblFormats.Where(e => e.Id == 345).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 345);
+            tblFormat entity = dc.tblFormats.Where(e => e.Id == 3).FirstOrDefault();
+            Assert.AreEqual(entity.Id, 3);
         }
     }
 }
