@@ -52,6 +52,9 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Rating" asp-action="Index">Ratings</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Index">User</a>
                         </li>
                         @{
@@ -91,6 +94,12 @@
                 </div>
                 <div>
                     @await Component.InvokeAsync("Sidebar")
+                </div>
+                <div class="header p-1">
+                    <h4>Shopping Cart</h4>
+                </div>
+                <div>
+                    @await Component.InvokeAsync("ShoppingCartComponent")
                 </div>
             </div>
 
@@ -133,5 +142,16 @@
         console.log('On');
         document.getElementById("overlay").style.display = "block";
         document.getElementById("output").src = picture;
+    }
+</script>
+
+<script type="text/javascript">
+    function AddToCart(id) {
+        $.get("/ShoppingCart/Add/" + id, function (data) {
+            var cartcount = parseInt($("#cartcount").val()) + 1;
+            $("#cartcount").val(cartcount);
+            $("#cartcountdisp").text(cartcount + " items");
+            console.log(cartcount + " items");
+        });
     }
 </script>
