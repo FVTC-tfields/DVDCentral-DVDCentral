@@ -55,7 +55,7 @@ namespace TSF.DVDCentral.BL
                     entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
                     entity.CustomerId = order.CustomerId;
                     entity.OrderDate = DateTime.Now;
-                    entity.ShipDate = DateTime.Now;
+                    entity.ShipDate = DateTime.Now.AddDays(3);
                     entity.UserId = order.UserId;
                     dc.tblOrders.Add(entity);
 
@@ -173,14 +173,38 @@ namespace TSF.DVDCentral.BL
 
                     if (entity != null)
                     {
+                        tblCustomer customerEntity = dc.tblCustomers.FirstOrDefault(s => s.Id == entity.CustomerId);
+                        tblUser userEntity = dc.tblUsers.FirstOrDefault(s => s.Id == entity.UserId);
+                        List<OrderItem> orderItems = OrderItemManager.LoadByOrderId(id);
+
+                        decimal subtotal = 0m;
+                        foreach (var orderItem in  orderItems)
+                        {
+                            tblMovie movieEntity = dc.tblMovies.FirstOrDefault(s => s.Id ==  orderItem.MovieId);
+
+                            subtotal = subtotal + (decimal)orderItem.Cost;
+                            orderItem.ImagePath = movieEntity.ImagePath;
+                            orderItem.Title = movieEntity.Title;
+                            orderItem.Description = movieEntity.Description;
+                        }
+
+                        decimal taxRate = .055m;
+
+
                         return new Order
                         {
                             Id = entity.Id,
                             CustomerId = entity.CustomerId,
+                            CustomerName = customerEntity.FirstName.Trim() + " " + customerEntity.LastName.Trim(),
+                            UserName = userEntity.UserName,
+                            UserFullName = userEntity.FirstName.Trim() + " " + userEntity.LastName.Trim(),
                             OrderDate = entity.OrderDate,
                             ShipDate = entity.ShipDate,
                             UserId = entity.UserId,
-                            OrderItems = OrderItemManager.LoadByOrderId(id)
+                            SubTotal = subtotal,
+                            Tax = subtotal * taxRate,
+                            Total = subtotal + (subtotal * taxRate),
+                            OrderItems = orderItems
                         };
                     }
                     else

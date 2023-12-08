@@ -10,12 +10,22 @@ namespace TSF.DVDCentral.BL.Models
     public class OrderItem
     {
         public int Id { get; set; }
+
         [DisplayName("Order Id")]
         public int OrderId { get; set; }
+
         public int Quantity { get; set; }
+
         [DisplayName("Movie Id")]
         public int MovieId { get; set; }
+
         public float Cost { get; set; }
+        
+        public string? ImagePath { get; set; }
+
+        public string? Description { get; set; }
+
+        public string? Title { get; set; }
 
     }
 }

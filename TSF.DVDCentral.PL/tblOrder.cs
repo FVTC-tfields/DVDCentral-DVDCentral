@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using TSF.DVDCentral.BL.Models;
 
 namespace TSF.DVDCentral.PL;
 

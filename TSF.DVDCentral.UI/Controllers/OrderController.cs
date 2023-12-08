@@ -10,7 +10,8 @@ namespace TSF.DVDCentral.UI.Controllers
     {
         public IActionResult Index()
         {
-            return View(OrderManager.Load());
+            var x = OrderManager.Load();
+            return View(x);
         }
 
         public IActionResult Details(int id)
@@ -46,7 +47,7 @@ namespace TSF.DVDCentral.UI.Controllers
         {
             ViewBag.Title = "Edit a Program";
             if (Authenticate.IsAuthenticated(HttpContext))
-                return View(RatingManager.LoadById(id));
+                return View(OrderManager.LoadById(id));
             else
                 return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
         }

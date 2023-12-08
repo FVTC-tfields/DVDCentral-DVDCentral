@@ -207,7 +207,8 @@ namespace TSF.DVDCentral.BL
                          s.Id,
                          s.Quantity,
                          s.MovieId,
-                         s.Cost
+                         s.Cost,
+                         s.OrderId
                      })
                      .ToList()
                     .ForEach(orderitem => list.Add(new OrderItem
@@ -215,7 +216,8 @@ namespace TSF.DVDCentral.BL
                         Id = orderitem.Id,
                         Quantity = orderitem.Quantity,
                         MovieId = orderitem.MovieId,
-                        Cost = (float)orderitem.Cost
+                        Cost = (float)orderitem.Cost,
+                        OrderId = orderitem.OrderId
                     }));
                 }
 
