@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using TSF.DVDCentral.BL;
 using TSF.DVDCentral.BL.Models;
 using TSF.DVDCentral.UI.Extensions;
+using TSF.DVDCentral.UI.Models;
+using TSF.DVDCentral.UI.ViewModels;
 
 namespace TSF.DVDCentral.UI.Controllers
 {
@@ -51,7 +54,10 @@ namespace TSF.DVDCentral.UI.Controllers
             cart = GetShoppingCart();
             ShoppingCartManager.Checkout(cart);
             HttpContext.Session.SetObject("cart", null);
-            return View();
+            if (Authenticate.IsAuthenticated(HttpContext))
+                return View(cart);
+            else
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
         }
     }
 }
