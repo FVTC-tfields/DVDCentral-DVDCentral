@@ -6,7 +6,7 @@
 
 <div class="row m-2">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" asp-route-returnurl="@ViewData["ReturnUrl"]">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -55,13 +55,16 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-default btn-primary btn-sm"
+                   asp-action="Index"
+                   asp-route-returnurl="@ViewData["ReturnUrl"]">Back</a>
             </div>
         </form>
     </div>
 </div>
 
 <div class="m-2">
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back</a>
 </div>
 
 @section Scripts {

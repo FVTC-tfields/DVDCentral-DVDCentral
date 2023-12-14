@@ -20,17 +20,17 @@ namespace TSF.DVDCentral.BL
             if (cart != null) { cart.Items.Remove(movie); }
         }
 
-        public static void Checkout(ShoppingCart cart)
+        public static void Checkout(ShoppingCart cart, int userId, int customerId)
         {
             try
             {
                 if (cart.Items.Count > 0)
                 {
                     Order order = new Order();
-                    order.UserId = 1;
+                    order.UserId = userId;
                     order.OrderDate = DateTime.Now;
                     order.ShipDate = DateTime.Now.AddDays(3);
-                    order.CustomerId = 1;
+                    order.CustomerId = customerId;
 
                     foreach (Movie item in cart.Items)
                     {

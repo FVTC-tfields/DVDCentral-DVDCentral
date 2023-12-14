@@ -21,5 +21,10 @@ namespace TSF.DVDCentral.BL.Models
         public string? State { get; set; }
         public string? ZIP { get; set; }
         public string? Phone { get; set; }
+
+        [DisplayName("Full Name")]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+
     }
 }

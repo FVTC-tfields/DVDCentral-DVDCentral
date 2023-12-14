@@ -8,8 +8,13 @@ namespace TSF.DVDCentral.UI.Controllers
 {
     public class CustomerController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string returnurl)
         {
+            if (returnurl != null)
+            {
+                return Redirect(returnurl);
+            }
+
             return View(CustomerManager.Load());
         }
 
@@ -18,8 +23,10 @@ namespace TSF.DVDCentral.UI.Controllers
             return View(CustomerManager.LoadById(id));
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string returnurl)
         {
+            ViewData["returnurl"] = returnurl;
+
             ViewBag.Title = "Create a Customer";
             if (Authenticate.IsAuthenticated(HttpContext))
                 return View();
@@ -28,11 +35,17 @@ namespace TSF.DVDCentral.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(Customer customer, string returnurl)
         {
             try
             {
                 int result = CustomerManager.Insert(customer);
+
+                if (returnurl != null)
+                {
+                    return Redirect(returnurl);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception)

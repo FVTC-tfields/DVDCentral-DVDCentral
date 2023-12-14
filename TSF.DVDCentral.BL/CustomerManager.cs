@@ -217,6 +217,43 @@ namespace TSF.DVDCentral.BL
             }
         }
 
+        public static Customer? LoadByUserId(int userId)
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblCustomer? entity = dc.tblCustomers.FirstOrDefault(s => s.UserId == userId);
+
+                    if (entity != null)
+                    {
+                        return new Customer
+                        {
+                            Id = entity.Id,
+                            FirstName = entity.FirstName,
+                            LastName = entity.LastName,
+                            UserId = entity.UserId,
+                            Address = entity.Address,
+                            City = entity.City,
+                            State = entity.State,
+                            ZIP = entity.ZIP,
+                            Phone = entity.Phone
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static List<Customer> Load()
         {
             try

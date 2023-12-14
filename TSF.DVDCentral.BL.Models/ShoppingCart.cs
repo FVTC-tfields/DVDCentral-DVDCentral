@@ -14,6 +14,7 @@ namespace TSF.DVDCentral.BL.Models
         const double ITEM_COST = 5;
 
         public List<Movie> Items { get; set; } = new List<Movie>();
+        
         public int NumberOfItems { get { return Items.Count; } }
 
         [DisplayFormat(DataFormatString = "{0:C}")]

@@ -24,6 +24,6 @@ namespace TSF.DVDCentral.BL.Models
         [DisplayName("Image")]
         public string? ImagePath { get; set; }
         public List<Genre> Genres { get; set; } = new List<Genre>();
-
+        public int Quantity { get; set; }
     }
 }
