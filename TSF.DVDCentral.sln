@@ -24,7 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.UI", "TSF.DV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.API", "TSF.DVDCentral.API\TSF.DVDCentral.API.csproj", "{32D5FA10-090A-4F6F-81FE-4F9276724236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.PL2", "TSF.DVDCentral.PL2\TSF.DVDCentral.PL2.csproj", "{B51ABFE8-3AFF-4F15-B7E4-B387B0A078D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.PL2", "TSF.DVDCentral.PL2\TSF.DVDCentral.PL2.csproj", "{B51ABFE8-3AFF-4F15-B7E4-B387B0A078D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.MigrationHandler", "TSF.DVDCentral.MigrationHandler\TSF.DVDCentral.MigrationHandler.csproj", "{0C3416E7-898B-4513-AAFD-FA31646078C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{B51ABFE8-3AFF-4F15-B7E4-B387B0A078D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B51ABFE8-3AFF-4F15-B7E4-B387B0A078D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B51ABFE8-3AFF-4F15-B7E4-B387B0A078D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C3416E7-898B-4513-AAFD-FA31646078C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C3416E7-898B-4513-AAFD-FA31646078C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C3416E7-898B-4513-AAFD-FA31646078C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C3416E7-898B-4513-AAFD-FA31646078C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
