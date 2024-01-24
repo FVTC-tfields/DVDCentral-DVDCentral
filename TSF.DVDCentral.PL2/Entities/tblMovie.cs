@@ -7,9 +7,9 @@ public class tblMovie
 {
     public Guid Id { get; set; }
 
-    public string Title { get; set; } = null!;
+    public string Title { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string Description { get; set; }
 
     public Guid FormatId { get; set; }
 
@@ -21,7 +21,7 @@ public class tblMovie
 
     public int Quantity { get; set; }
 
-    public string ImagePath { get; set; } = null!;
+    public string ImagePath { get; set; }
     public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
     public virtual tblDirector Director { get; set; }
     public virtual tblRating Rating { get; set; }

@@ -7,8 +7,8 @@ public class tblDirector
 {
     public Guid Id { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; }
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; }
     public virtual ICollection<tblMovie> tblMovies { get; set; }
 }

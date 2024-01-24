@@ -7,6 +7,6 @@ public class tblGenre
 {
     public Guid Id { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string Description { get; set; }
     public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
 }
