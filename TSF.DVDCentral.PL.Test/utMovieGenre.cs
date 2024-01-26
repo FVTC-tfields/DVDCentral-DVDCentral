@@ -1,37 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿
 
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovieGenre
+    public class utMovieGenre : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
-
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblMovieGenres.Count());
+            Assert.AreEqual(13, dc.tblMovieGenres.Count());
         }
 
         [TestMethod]
@@ -40,9 +17,9 @@ namespace TSF.DVDCentral.PL.Test
 
             // Make an entity
             tblMovieGenre entity = new tblMovieGenre();
-            entity.Id = 4;
-            entity.MovieId = 4;
-            entity.GenreId = 4;
+            entity.Id = Guid.NewGuid();
+            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
+            entity.GenreId = dc.tblGenres.FirstOrDefault().Id;
 
             // Add the entity to the database
             dc.tblMovieGenres.Add(entity);
@@ -59,8 +36,8 @@ namespace TSF.DVDCentral.PL.Test
             tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault();
 
             // Change property values
-            entity.MovieId = 4;
-            entity.GenreId = 4;
+            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
+            entity.GenreId = dc.tblGenres.FirstOrDefault().Id;
 
             int result = dc.SaveChanges();
             Assert.IsTrue(result > 0);
@@ -70,7 +47,7 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblMovieGenres where id = 3
-            tblMovieGenre entity = dc.tblMovieGenres.Where(e => e.Id == 3).FirstOrDefault();
+            tblMovieGenre entity = dc.tblMovieGenres.OrderBy(e => e.Id).LastOrDefault();
 
             dc.tblMovieGenres.Remove(entity);
             int result = dc.SaveChanges(true);

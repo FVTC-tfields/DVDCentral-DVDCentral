@@ -1,37 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿
 
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utFormat
+    public class utFormat : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
-
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblFormats.Count());
+            Assert.AreEqual(4, dc.tblFormats.Count());
         }
 
         [TestMethod]
@@ -40,7 +17,7 @@ namespace TSF.DVDCentral.PL.Test
 
             // Make an entity
             tblFormat entity = new tblFormat();
-            entity.Id = -59;
+            entity.Id = Guid.NewGuid();
             entity.Description = "Taco";
 
             // Add the entity to the database
@@ -68,20 +45,12 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblFormats where id = 345
-            tblFormat entity = dc.tblFormats.Where(e => e.Id == 3).FirstOrDefault();
+            tblFormat entity = dc.tblFormats.OrderBy(e => e.Id).LastOrDefault();
 
             dc.tblFormats.Remove(entity);
             int result = dc.SaveChanges(true);
 
             Assert.AreNotEqual(result, 0);
-        }
-
-        [TestMethod]
-        public void LoadByIdTest()
-        {
-            // Select * from tblFormat where id = 345
-            tblFormat entity = dc.tblFormats.Where(e => e.Id == 3).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 3);
         }
     }
 }

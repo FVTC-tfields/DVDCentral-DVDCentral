@@ -1,33 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿
 
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utOrder
+    public class utOrder : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
-
         [TestMethod]
         public void LoadTest()
         {
@@ -40,11 +17,11 @@ namespace TSF.DVDCentral.PL.Test
 
             // Make an entity
             tblOrder entity = new tblOrder();
-            entity.Id = 4;
-            entity.CustomerId = 4;
+            entity.Id = Guid.NewGuid();
+            entity.CustomerId = dc.tblCustomers.FirstOrDefault().Id;
             entity.OrderDate = DateTime.Now;
             entity.ShipDate = DateTime.Now;
-            entity.UserId = 33333;
+            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
 
             // Add the entity to the database
             dc.tblOrders.Add(entity);
@@ -61,8 +38,8 @@ namespace TSF.DVDCentral.PL.Test
             tblOrder entity = dc.tblOrders.FirstOrDefault();
 
             // Change property values
-            entity.CustomerId = 4;
-            entity.UserId = 33333;
+            entity.CustomerId = dc.tblCustomers.FirstOrDefault().Id;
+            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
 
             int result = dc.SaveChanges();
             Assert.IsTrue(result > 0);
@@ -72,20 +49,12 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblOrders where id = 3
-            tblOrder entity = dc.tblOrders.Where(e => e.Id == 3).FirstOrDefault();
+            tblOrder entity = dc.tblOrders.OrderBy(e => e.Id).LastOrDefault();
 
             dc.tblOrders.Remove(entity);
             int result = dc.SaveChanges(true);
 
             Assert.AreNotEqual(result, 0);
-        }
-
-        [TestMethod]
-        public void LoadByIdTest()
-        {
-            // Select * from tblDirector where id = 4
-            tblOrder entity = dc.tblOrders.Where(e => e.Id == 3).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 3);
         }
     }
 }

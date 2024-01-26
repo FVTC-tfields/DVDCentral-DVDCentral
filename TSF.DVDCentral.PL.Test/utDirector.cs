@@ -1,32 +1,16 @@
-﻿using System.Xml;
+﻿
 
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utDirector
+    public class utDirector : utBase
     {
-        protected DVDCentralEntities dc;
-        protected IDbContextTransaction transaction;
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            dc = new DVDCentralEntities();
-            transaction = dc.Database.BeginTransaction();
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            transaction.Rollback();
-            transaction.Dispose();
-            dc = null;
-        }
+        
 
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblDirectors.Count());
+            Assert.AreEqual(6, dc.tblDirectors.Count());
         }
 
         [TestMethod]
@@ -35,7 +19,7 @@ namespace TSF.DVDCentral.PL.Test
 
             // Make an entity
             tblDirector entity = new tblDirector();
-            entity.Id = -91;
+            entity.Id = Guid.NewGuid();
             entity.FirstName = "Taco";
             entity.LastName = "Bell";
 
@@ -65,20 +49,12 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblDirectors where id = 345
-            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 3).FirstOrDefault();
+            tblDirector entity = dc.tblDirectors.OrderBy(e => e.Id).LastOrDefault();
 
             dc.tblDirectors.Remove(entity);
             int result = dc.SaveChanges(true);
 
             Assert.AreNotEqual(result, 0);
-        }
-
-        [TestMethod]
-        public void LoadByIdTest()
-        {
-            // Select * from tblDirector where id = 4
-            tblDirector entity = dc.tblDirectors.Where(e => e.Id == 3).FirstOrDefault();
-            Assert.AreEqual(entity.Id, 3);
         }
     }
 }
