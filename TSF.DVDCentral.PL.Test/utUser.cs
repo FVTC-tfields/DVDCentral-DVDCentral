@@ -9,8 +9,7 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void LoadTest()
         {
-            var users = base.LoadTest();
-            Assert.IsTrue(users.Count() > 0);
+            Assert.IsTrue(base.LoadTest().Count() > 0);
         }
 
         [TestMethod]
@@ -19,13 +18,12 @@ namespace TSF.DVDCentral.PL.Test
             tblUser newRow = new tblUser();
 
             newRow.Id = Guid.NewGuid();
-            newRow.FirstName = "Joe";
-            newRow.LastName = "Billings";
+            newRow.FirstName = "Tyler";
+            newRow.LastName = "Fields";
             newRow.UserName = "XXXXXX";
             newRow.Password = "YYYYY";
 
-            dc.tblUsers.Add(newRow);
-            int rowsAffected = dc.SaveChanges();
+            int rowsAffected = InsertTest(newRow);
 
             Assert.AreEqual(1, rowsAffected);
         }
@@ -37,8 +35,8 @@ namespace TSF.DVDCentral.PL.Test
 
             if (row != null)
             {
-                row.FirstName = "Sarah";
-                row.LastName = "Vicchiollo";
+                row.FirstName = "Tyler";
+                row.LastName = "Fields";
                 int rowsAffected = dc.SaveChanges();
 
                 Assert.AreEqual(1, rowsAffected);

@@ -28,7 +28,7 @@ namespace TSF.DVDCentral.PL.Test
             entity.ImagePath = "dtb";
 
             // Commit the changes
-            int result = base.InsertTest(entity);
+            int result = InsertTest(entity);
             Assert.AreEqual(1, result);
         }
 

@@ -27,11 +27,7 @@ namespace TSF.DVDCentral.PL.Test
             entity.ZIP = "11111";
             entity.Phone = "1234567891";
 
-            // Add the entity to the database
-            dc.tblCustomers.Add(entity);
-
-            // Commit the changes
-            int result = dc.SaveChanges();
+            int result = InsertTest(entity);
             Assert.AreEqual(1, result);
         }
 
@@ -39,32 +35,24 @@ namespace TSF.DVDCentral.PL.Test
         public void UpdateTest()
         {
             // SELECT * FROM tblCustomers - Use the first one.
-            tblCustomer entity = dc.tblCustomers.FirstOrDefault();
+            tblCustomer entity = base.LoadTest().FirstOrDefault();
 
             // Change property values
             entity.FirstName = "Tyler";
             entity.LastName = "Fields";
-            entity.UserId = dc.tblUsers.FirstOrDefault().Id;
-            entity.Address = "123 Taco Drive";
-            entity.City = "Milwaukee";
-            entity.State = "WI";
-            entity.ZIP = "11111";
-            entity.Phone = "1234567891";
-
-            int result = dc.SaveChanges();
+            int result = UpdateTest(entity);
             Assert.IsTrue(result > 0);
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblCustomers where id = 3
-            tblCustomer entity = dc.tblCustomers.OrderBy(e => e.Id).LastOrDefault();
-
-            dc.tblCustomers.Remove(entity);
-            int result = dc.SaveChanges(true);
-
-            Assert.AreNotEqual(result, 0);
+            tblCustomer entity = base.LoadTest().FirstOrDefault();
+            if (entity != null)
+            {
+                int rowsAffected = DeleteTest(entity);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 }

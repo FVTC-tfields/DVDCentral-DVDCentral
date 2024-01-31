@@ -15,48 +15,45 @@ namespace TSF.DVDCentral.PL.Test
         public void InsertTest()
         {
 
-            // Make an entity
-            tblOrderItem entity = new tblOrderItem();
-            entity.Id = Guid.NewGuid();
-            entity.OrderId = dc.tblOrders.FirstOrDefault().Id;
-            entity.Quantity = 8;
-            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
-            entity.Cost = 40;
+            tblOrderItem newRow = new tblOrderItem();
 
-            // Add the entity to the database
-            dc.tblOrderItems.Add(entity);
+            newRow.Id = Guid.NewGuid();
+            newRow.MovieId = dc.tblMovies.FirstOrDefault().Id;
+            newRow.OrderId = dc.tblOrders.FirstOrDefault().Id;
+            newRow.Quantity = 99;
+            newRow.Cost = 9.99;
 
-            // Commit the changes
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
+            dc.tblOrderItems.Add(newRow);
+            int rowsAffected = dc.SaveChanges();
+
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            // SELECT * FROM tblOrderItems - Use the first one.
-            tblOrderItem entity = dc.tblOrderItems.FirstOrDefault();
+            tblOrderItem row = base.LoadTest().FirstOrDefault();
 
-            // Change property values
-            entity.OrderId = dc.tblOrders.FirstOrDefault().Id;
-            entity.Quantity = 8;
-            entity.MovieId = dc.tblMovies.FirstOrDefault().Id;
-            entity.Cost = 40;
+            if (row != null)
+            {
+                row.MovieId = dc.tblMovies.FirstOrDefault().Id;
+                row.Quantity = 100;
+                row.Cost = 10.99;
+                int rowsAffected = UpdateTest(row);
 
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblOrderItems where id = 3
-            tblOrderItem entity = dc.tblOrderItems.OrderBy(e => e.Id).LastOrDefault();
+            tblOrderItem row = base.LoadTest().FirstOrDefault();
 
-            dc.tblOrderItems.Remove(entity);
-            int result = dc.SaveChanges(true);
-
-            Assert.AreNotEqual(result, 0);
+            if (row != null)
+            {
+                int rowsAffected = DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
-    }
 }

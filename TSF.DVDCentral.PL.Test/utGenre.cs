@@ -25,26 +25,27 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            // SELECT * FROM tblGenres - Use the first one.
-            tblGenre entity = dc.tblGenres.FirstOrDefault();
+            tblGenre row = base.LoadTest().FirstOrDefault();
 
-            // Change property values
-            entity.Description = "New Description";
-
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+            if (row != null)
+            {
+                row.Description = "YYYYY";
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblGenres where id = 3
-            tblGenre entity = dc.tblGenres.FirstOrDefault(x => x.Description == "Other");
+            tblGenre row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
 
-            dc.tblGenres.Remove(entity);
-            int result = dc.SaveChanges(true);
-
-            Assert.AreNotEqual(result, 0);
+            if (row != null)
+            {
+                dc.tblGenres.Remove(row);
+                int rowsAffected = UpdateTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 }

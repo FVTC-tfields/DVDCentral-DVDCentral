@@ -26,25 +26,29 @@ namespace TSF.DVDCentral.PL.Test
         public void UpdateTest()
         {
             // SELECT * FROM tblFormats - Use the first one.
-            tblFormat entity = dc.tblFormats.FirstOrDefault();
+            tblFormat row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
 
-            // Change property values
-            entity.Description = "New Description";
+            if (row != null)
+            {
+                row.Description = "YYYY";
+                int rowsAffected = dc.SaveChanges();
 
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblFormats where id = 345
-            tblFormat entity = dc.tblFormats.FirstOrDefault(x => x.Description == "Other");
+            tblFormat row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
 
-            dc.tblFormats.Remove(entity);
-            int result = dc.SaveChanges(true);
+            if (row != null)
+            {
+                dc.tblFormats.Remove(row);
+                int rowsAffected = dc.SaveChanges();
 
-            Assert.AreNotEqual(result, 0);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 }
