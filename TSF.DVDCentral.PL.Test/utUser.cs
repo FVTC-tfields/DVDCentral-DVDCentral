@@ -3,13 +3,13 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utUser : utBase
+    public class utUser : utBase<tblUser>
     {
 
         [TestMethod]
         public void LoadTest()
         {
-            var users = dc.tblUsers;
+            var users = base.LoadTest();
             Assert.IsTrue(users.Count() > 0);
         }
 
@@ -33,7 +33,6 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            InsertTest();
             tblUser row = dc.tblUsers.FirstOrDefault();
 
             if (row != null)
@@ -50,8 +49,6 @@ namespace TSF.DVDCentral.PL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            InsertTest();
-
             tblUser row = dc.tblUsers.FirstOrDefault();
 
             if (row != null)

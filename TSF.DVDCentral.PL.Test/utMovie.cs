@@ -3,12 +3,12 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovie : utBase
+    public class utMovie : utBase<tblMovie>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(7, dc.tblMovies.Count());
+            Assert.AreEqual(7, base.LoadTest().Count());
         }
 
         [TestMethod]
@@ -20,51 +20,42 @@ namespace TSF.DVDCentral.PL.Test
             entity.Id = Guid.NewGuid();
             entity.Title = "New Title";
             entity.Description = "New Description";
-            entity.FormatId = dc.tblFormats.FirstOrDefault().Id;
-            entity.DirectorId = dc.tblDirectors.FirstOrDefault().Id;
-            entity.RatingId =dc.tblRatings.FirstOrDefault().Id;
+            entity.FormatId = base.LoadTest().FirstOrDefault().FormatId;
+            entity.DirectorId = base.LoadTest().FirstOrDefault().DirectorId;
+            entity.RatingId =base.LoadTest().FirstOrDefault().RatingId;
             entity.Cost = 6;
             entity.Quantity = 111;
             entity.ImagePath = "dtb";
 
-            // Add the entity to the database
-            dc.tblMovies.Add(entity);
-
             // Commit the changes
-            int result = dc.SaveChanges();
+            int result = base.InsertTest(entity);
             Assert.AreEqual(1, result);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            // SELECT * FROM tblMovies - Use the first one.
-            tblMovie entity = dc.tblMovies.FirstOrDefault();
+            tblMovie row = base.LoadTest().FirstOrDefault();
 
-            // Change property values
-            entity.Title = "New Title";
-            entity.Description = "New Description";
-            entity.FormatId = dc.tblFormats.FirstOrDefault().Id;
-            entity.DirectorId = dc.tblDirectors.FirstOrDefault().Id;
-            entity.RatingId = dc.tblRatings.FirstOrDefault().Id;
-            entity.Cost = 6;
-            entity.Quantity = 111;
-            entity.ImagePath = "dtb";
-
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+            if (row != null)
+            {
+                row.Description = "YYYYY";
+                int rowsAffected = UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblMovies where id = 3
-            tblMovie entity = dc.tblMovies.OrderBy(e => e.Id).LastOrDefault();
+            tblMovie row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
 
-            dc.tblMovies.Remove(entity);
-            int result = dc.SaveChanges(true);
+            if (row != null)
+            {
+                int rowsAffected = DeleteTest(row);
 
-            Assert.AreNotEqual(result, 0);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 }

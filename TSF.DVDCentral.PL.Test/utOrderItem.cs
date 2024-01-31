@@ -3,12 +3,12 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utOrderItem : utBase
+    public class utOrderItem : utBase<tblOrderItem>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblOrderItems.Count());
+            Assert.AreEqual(3, base.LoadTest().Count());
         }
 
         [TestMethod]

@@ -3,12 +3,12 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utMovieGenre : utBase
+    public class utMovieGenre : utBase<tblMovieGenre>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(13, dc.tblMovieGenres.Count());
+            Assert.AreEqual(13, base.LoadTest().Count());
         }
 
         [TestMethod]

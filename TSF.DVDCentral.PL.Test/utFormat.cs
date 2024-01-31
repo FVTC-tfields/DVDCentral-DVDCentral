@@ -3,29 +3,23 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utFormat : utBase
+    public class utFormat : utBase<tblFormat>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(4, dc.tblFormats.Count());
+            Assert.AreEqual(4, base.LoadTest().Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-
-            // Make an entity
-            tblFormat entity = new tblFormat();
-            entity.Id = Guid.NewGuid();
-            entity.Description = "Taco";
-
-            // Add the entity to the database
-            dc.tblFormats.Add(entity);
-
-            // Commit the changes
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
+            int rowsAffected = base.InsertTest(new tblFormat
+            {
+                Id = Guid.NewGuid(),
+                Description = "XXXXX"
+            });
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
@@ -45,7 +39,7 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblFormats where id = 345
-            tblFormat entity = dc.tblFormats.OrderBy(e => e.Id).LastOrDefault();
+            tblFormat entity = dc.tblFormats.FirstOrDefault(x => x.Description == "Other");
 
             dc.tblFormats.Remove(entity);
             int result = dc.SaveChanges(true);

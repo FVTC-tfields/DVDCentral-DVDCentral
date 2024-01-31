@@ -3,54 +3,45 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utRating : utBase
+    public class utRating : utBase<tblRating>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(5, dc.tblRatings.Count());
+            Assert.AreEqual(5, base.LoadTest().Count());
         }
 
-        [TestMethod]
-        public void InsertTest()
-        {
-
-            // Make an entity
-            tblRating entity = new tblRating();
-            entity.Id = Guid.NewGuid();
-            entity.Description = "Taco";
-
-            // Add the entity to the database
-            dc.tblRatings.Add(entity);
-
-            // Commit the changes
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
+        [TestMethod] 
+        public void InsertTest() 
+        { 
+            int rowsAffected = base.InsertTest( new tblRating { Id = Guid.NewGuid(), 
+                                                               Description = "XXXXX"});
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            // SELECT * FROM tblRatings - Use the first one.
-            tblRating entity = dc.tblRatings.FirstOrDefault();
+            tblRating row = base.LoadTest().FirstOrDefault();
 
-            // Change property values
-            entity.Description = "New Description";
-
-            int result = dc.SaveChanges();
-            Assert.IsTrue(result > 0);
+            if (row != null) 
+            {
+                row.Description = "YYYYY";
+                int rowsAffected = base.UpdateTest(row);
+                Assert.AreEqual(1, rowsAffected);
+            }
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            // Select * from tblRatings where id = 3
-            tblRating entity = dc.tblRatings.OrderBy(e => e.Id).LastOrDefault();
+            tblRating row = base.LoadTest().FirstOrDefault(x => x.Description == "Other");
 
-            dc.tblRatings.Remove(entity);
-            int result = dc.SaveChanges(true);
-
-            Assert.AreNotEqual(result, 0);
+            if (row != null)
+            {
+                int rowsAffected = base.DeleteTest(row);
+                Assert.IsTrue(rowsAffected == 1);
+            }
         }
     }
 }

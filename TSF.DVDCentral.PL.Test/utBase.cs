@@ -3,7 +3,7 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utBase
+    public class utBase<T> where T : class
     {
         protected DVDCentralEntities dc; // declare the DataContext
         protected IDbContextTransaction transaction;
@@ -39,5 +39,29 @@ namespace TSF.DVDCentral.PL.Test
             transaction.Dispose();
             dc = null;
         }
+
+        public List<T> LoadTest()
+        {
+            return dc.Set<T>().ToList();
+        }
+
+        public int InsertTest(T row)
+        {
+            dc.Set<T>().Add(row);
+            return dc.SaveChanges();
+        }
+
+        public int UpdateTest(T row)
+        {
+            dc.Entry(row).State = EntityState.Modified;
+            return dc.SaveChanges();
+        }
+
+        public int DeleteTest(T row)
+        {
+            dc.Set<T>().Remove(row);
+            return dc.SaveChanges();
+        }
+
     }
 }

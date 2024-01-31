@@ -3,29 +3,23 @@
 namespace TSF.DVDCentral.PL.Test
 {
     [TestClass]
-    public class utGenre : utBase
+    public class utGenre : utBase<tblGenre>
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(10, dc.tblGenres.Count());
+            Assert.AreEqual(10, base.LoadTest().Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
-
-            // Make an entity
-            tblGenre entity = new tblGenre();
-            entity.Id = Guid.NewGuid();
-            entity.Description = "Taco";
-
-            // Add the entity to the database
-            dc.tblGenres.Add(entity);
-
-            // Commit the changes
-            int result = dc.SaveChanges();
-            Assert.AreEqual(1, result);
+            int rowsAffected = base.InsertTest(new tblGenre
+            {
+                Id = Guid.NewGuid(),
+                Description = "XXXXX"
+            });
+            Assert.AreEqual(1, rowsAffected);
         }
 
         [TestMethod]
@@ -45,7 +39,7 @@ namespace TSF.DVDCentral.PL.Test
         public void DeleteTest()
         {
             // Select * from tblGenres where id = 3
-            tblGenre entity = dc.tblGenres.OrderBy(e => e.Id).LastOrDefault();
+            tblGenre entity = dc.tblGenres.FirstOrDefault(x => x.Description == "Other");
 
             dc.tblGenres.Remove(entity);
             int result = dc.SaveChanges(true);
