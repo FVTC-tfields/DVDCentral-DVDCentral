@@ -1,21 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
+﻿using System.Xml.Linq;
 
 namespace TSF.DVDCentral.BL
 {
     public static class OrderItemManager
     {
-        public static int Insert(int orderid,
-                                 ref int id,
+        public static int Insert(Guid orderid,
+                                 Guid id,
                                  int quantity,
-                                 int movieid,
+                                 Guid movieid,
                                  int cost,
                                  bool rollback = false)
         {
@@ -64,7 +56,7 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Quantity = orderitem.Quantity;
                     entity.MovieId = orderitem.MovieId;
                     entity.Cost = orderitem.Cost;
@@ -125,7 +117,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -159,7 +151,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static OrderItem LoadById(int id)
+        public static OrderItem LoadById(Guid id)
         {
             try
             {
@@ -192,7 +184,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<OrderItem> LoadByOrderId(int orderId)
+        public static List<OrderItem> LoadByOrderId(Guid orderId)
         {
             try
             {
@@ -201,8 +193,8 @@ namespace TSF.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from s in dc.tblOrderItems
-                     where s.OrderId == orderId
-                     select new
+                     where s.OrderId == orderId           
+          select new
                      {
                          s.Id,
                          s.Quantity,

@@ -56,4 +56,5 @@ namespace TSF.DVDCentral.PL.Test
                 Assert.IsTrue(rowsAffected == 1);
             }
         }
+    }
 }

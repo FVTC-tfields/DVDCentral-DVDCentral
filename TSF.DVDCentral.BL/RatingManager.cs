@@ -1,19 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
+﻿using System.Xml.Linq;
 
 namespace TSF.DVDCentral.BL
 {
     public static class RatingManager
     {
         public static int Insert(string description,
-                                 ref int id,
+                                 Guid id,
                                  bool rollback = false)
         {
             try
@@ -58,7 +50,7 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblRatings.Any() ? dc.tblRatings.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Description = rating.Description;
 
 
@@ -115,7 +107,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -149,7 +141,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Rating LoadById(int id)
+        public static Rating LoadById(Guid id)
         {
             try
             {

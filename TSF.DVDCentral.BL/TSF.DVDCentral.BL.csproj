@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TSF.DVDCentral.BL.Models\TSF.DVDCentral.BL.Models.csproj" />
     <ProjectReference Include="..\TSF.DVDCentral.PL2\TSF.DVDCentral.PL2.csproj" />
+    <ProjectReference Include="..\TSF.DVDCentral.PL\TSF.DVDCentral.PL.csproj" />
   </ItemGroup>
 
 </Project>

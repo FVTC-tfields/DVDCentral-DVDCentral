@@ -1,19 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
-
-namespace TSF.DVDCentral.BL
+﻿namespace TSF.DVDCentral.BL
 {
     public static class GenreManager
     {
         public static int Insert(string description,
-                                 ref int id,
+                                 Guid id,
                                  bool rollback = false)
         {
             try
@@ -58,7 +48,7 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblGenres.Any() ? dc.tblGenres.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Description = genre.Description;
 
 
@@ -115,7 +105,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -149,7 +139,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Genre LoadById(int id)
+        public static Genre LoadById(Guid id)
         {
             try
             {

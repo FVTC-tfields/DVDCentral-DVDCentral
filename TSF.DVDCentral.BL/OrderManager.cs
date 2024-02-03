@@ -1,20 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
+﻿using System.Xml.Linq;
 
 namespace TSF.DVDCentral.BL
 {
     public static class OrderManager
     {
-        public static int Insert(int orderid,
-                                 int userid,
-                                 ref int id,
+        public static int Insert(Guid orderid,
+                                 Guid userid,
+                                 Guid id,
                                  bool rollback = false)
         {
             try
@@ -52,14 +44,14 @@ namespace TSF.DVDCentral.BL
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
                     tblOrder entity = new tblOrder();
-                    entity.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.CustomerId = order.CustomerId;
                     entity.OrderDate = DateTime.Now;
                     entity.ShipDate = DateTime.Now.AddDays(3);
                     entity.UserId = order.UserId;
                     dc.tblOrders.Add(entity);
 
-                    var orderItemId = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(s => s.Id) + 1 : 1;
+                    var orderItemId = Guid.NewGuid();
                     foreach (var orderItem in order.OrderItems) 
                     { 
                         tblOrderItem entityItem = new tblOrderItem();
@@ -71,7 +63,6 @@ namespace TSF.DVDCentral.BL
                         dc.tblOrderItems.Add(entityItem);
 
                         orderItem.OrderId = entity.Id;
-                        orderItemId++;
                     }
 
                     // IMPORTANT - BACK FILL THE ID
@@ -129,7 +120,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -163,7 +154,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Order LoadById(int id)
+        public static Order LoadById(Guid id)
         {
             try
             {
@@ -221,7 +212,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load(int? customerId = null)
+        public static List<Order> Load(Guid? customerId = null)
         {
             try
             {

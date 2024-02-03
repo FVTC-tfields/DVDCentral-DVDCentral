@@ -8,8 +8,19 @@ namespace TSF.DVDCentral.BL.Models
 {
     public class Genre
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string? Description { get; set; }
+
+        public Genre()
+        {
+
+        }
+
+        public Genre(Guid id, string description)
+        {
+            Id = id;
+            Description = description;
+        }
 
     }
 }

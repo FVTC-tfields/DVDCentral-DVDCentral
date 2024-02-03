@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TSF.DVDCentral.PL2.Entities;
+#nullable disable
 
-public class tblOrderItem
+namespace TSF.DVDCentral.PL2.Entities
 {
-    public Guid Id { get; set; }
 
-    public Guid OrderId { get; set; }
+    public class tblOrderItem : IEntity
+    {
+        public Guid Id { get; set; }
 
-    public int Quantity { get; set; }
+        public Guid OrderId { get; set; }
 
-    public Guid MovieId { get; set; }
+        public int Quantity { get; set; }
 
-    public double Cost { get; set; }
+        public Guid MovieId { get; set; }
+
+        public double Cost { get; set; }
+
+        public virtual tblMovie Movie { get; set; }
+        public virtual tblOrder Order { get; set; }
+    }
+
 }

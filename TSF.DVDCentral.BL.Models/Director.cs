@@ -10,7 +10,7 @@ namespace TSF.DVDCentral.BL.Models
 {
     public class Director
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [DisplayName("First Name")]
         public string? FirstName { get; set; }
         [DisplayName("Last Name")]

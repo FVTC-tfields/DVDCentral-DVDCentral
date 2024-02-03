@@ -1,14 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
+﻿using System.Xml.Linq;
 
 namespace TSF.DVDCentral.BL
 {
@@ -16,12 +6,12 @@ namespace TSF.DVDCentral.BL
     {
         public static int Insert(string title,
                                  string description,
-                                 ref int id,
-                                 int formatid,
-                                 int directorid,
-                                 int ratingid,
+                                 Guid id,
+                                 Guid formatid,
+                                 Guid directorid,
+                                 Guid ratingid,
                                  float cost,
-                                 int instkqty,
+                                 int quantity,
                                  string imagepath,
                                  bool rollback = false)
         {
@@ -35,7 +25,7 @@ namespace TSF.DVDCentral.BL
                     DirectorId = directorid,
                     RatingId = ratingid,
                     Cost = cost,
-                    InStkQty = instkqty,
+                    Quantity = quantity,
                     ImagePath = imagepath
                 };
 
@@ -74,14 +64,14 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.Title = movie.Title;
                     entity.Description = movie.Description;
                     entity.FormatId = movie.FormatId;
                     entity.DirectorId = movie.DirectorId;
                     entity.RatingId = movie.RatingId;
                     entity.Cost = movie.Cost;
-                    entity.InStkQty = movie.InStkQty;
+                    entity.Quantity = movie.Quantity;
                     entity.ImagePath = movie.ImagePath;
 
 
@@ -125,7 +115,7 @@ namespace TSF.DVDCentral.BL
                         entity.DirectorId = movie.DirectorId;
                         entity.RatingId = movie.RatingId;
                         entity.Cost = movie.Cost;
-                        entity.InStkQty = movie.InStkQty;
+                        entity.Quantity = movie.Quantity;
                         entity.ImagePath = movie.ImagePath;
                         results = dc.SaveChanges();
                     }
@@ -145,7 +135,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -179,7 +169,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Movie LoadById(int id)
+        public static Movie LoadById(Guid id)
         {
             try
             {
@@ -198,7 +188,7 @@ namespace TSF.DVDCentral.BL
                             DirectorId = entity.DirectorId,
                             RatingId = entity.RatingId,
                             Cost = (float)entity.Cost,
-                            InStkQty = entity.InStkQty,
+                            Quantity = entity.Quantity,
                             ImagePath = entity.ImagePath
 
                         };
@@ -217,7 +207,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Movie> Load(int? genreId = null)
+        public static List<Movie> Load(Guid? genreId = null)
         {
             try
             {
@@ -237,7 +227,7 @@ namespace TSF.DVDCentral.BL
                          s.DirectorId,
                          s.RatingId,
                          s.Cost,
-                         s.InStkQty,
+                         s.Quantity,
                          s.ImagePath,
                          p.GenreId
                      })
@@ -251,7 +241,7 @@ namespace TSF.DVDCentral.BL
                         DirectorId = movie.DirectorId,
                         RatingId = movie.RatingId,
                         Cost = (float)movie.Cost,
-                        InStkQty = movie.InStkQty,
+                        Quantity = movie.Quantity,
                         ImagePath = movie.ImagePath,
                     }));
                 }

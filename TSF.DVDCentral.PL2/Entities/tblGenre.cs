@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TSF.DVDCentral.PL2.Entities;
+#nullable disable
 
-public class tblGenre
+namespace TSF.DVDCentral.PL2.Entities
 {
-    public Guid Id { get; set; }
 
-    public string Description { get; set; }
-    public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
+    public class tblGenre
+    {
+        public Guid Id { get; set; }
+
+        public string Description { get; set; }
+        public virtual ICollection<tblMovieGenre> tblMovieGenres { get; set; }
+    }
+
 }

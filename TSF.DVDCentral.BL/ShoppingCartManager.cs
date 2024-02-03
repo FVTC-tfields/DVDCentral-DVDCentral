@@ -1,12 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TSF.DVDCentral.BL.Models;
-
-namespace TSF.DVDCentral.BL
+﻿namespace TSF.DVDCentral.BL
 {
     public class ShoppingCartManager
     {
@@ -20,7 +12,7 @@ namespace TSF.DVDCentral.BL
             if (cart != null) { cart.Items.Remove(movie); }
         }
 
-        public static void Checkout(ShoppingCart cart, int userId, int customerId)
+        public static void Checkout(ShoppingCart cart, Guid userId, Guid customerId)
         {
             try
             {

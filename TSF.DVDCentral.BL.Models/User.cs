@@ -9,10 +9,7 @@ namespace TSF.DVDCentral.BL.Models
 {
     public class User
     {
-        public int Id { get; set; }
-
-        [DisplayName("User Id")]
-        public string UserId { get; set; }
+        public Guid Id { get; set; }
 
         public string UserName { get; set; }
         

@@ -1,13 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
 
 namespace TSF.DVDCentral.BL
 {
@@ -63,11 +55,10 @@ namespace TSF.DVDCentral.BL
 
                     tblUser entity = new tblUser();
 
-                    entity.Id = dc.tblUsers.Any() ? dc.tblCustomers.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.UserName = user.UserName;
                     entity.FirstName = user.FirstName;
                     entity.LastName = user.LastName;
-                    entity.UserId = user.UserId;
                     entity.Password = GetHash(user.Password);
 
                     // IMPORTANT - BACK FILL THE ID
@@ -92,13 +83,13 @@ namespace TSF.DVDCentral.BL
         {
             try
             {
-                if (!string.IsNullOrEmpty(user.UserId))
+                if (!string.IsNullOrEmpty(user.UserName))
                 {
                     if (!string.IsNullOrEmpty(user.Password))
                     {
                         using (DVDCentralEntities dc = new DVDCentralEntities())
                         {
-                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.UserId == user.UserId);
+                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.UserName == user.UserName);
                             if (tblUser != null)
                             {
                                 if (tblUser.Password == GetHash(user.Password))
@@ -149,7 +140,6 @@ namespace TSF.DVDCentral.BL
                 {
                     User user = new User
                     {
-                        UserId = "bfoote",
                         UserName = "bfoote",
                         FirstName = "Brian",
                         LastName = "Foote",
@@ -159,7 +149,6 @@ namespace TSF.DVDCentral.BL
 
                     user = new User
                     {
-                        UserId = "tfields",
                         UserName = "tfields",
                         FirstName = "Tyler",
                         LastName = "Fields",
@@ -184,7 +173,7 @@ namespace TSF.DVDCentral.BL
 
                     if (entity != null)
                     {
-                        entity.UserId = user.UserId;
+                        entity.UserName = user.UserName;
                         entity.FirstName = user.FirstName;
                         entity.LastName = user.LastName;
                         entity.Password = user.Password;
@@ -219,7 +208,7 @@ namespace TSF.DVDCentral.BL
                      select new
                      {
                          s.Id,
-                         s.UserId,
+                         s.UserName,
                          s.FirstName,
                          s.LastName,
                          s.Password
@@ -229,7 +218,7 @@ namespace TSF.DVDCentral.BL
                     .ForEach(user => list.Add(new User
                     {
                         Id = user.Id,
-                        UserId = user.UserId,
+                        UserName = user.UserName,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         Password = user.Password
@@ -244,7 +233,7 @@ namespace TSF.DVDCentral.BL
                 throw;
             }
         }
-        public static User LoadById(int id)
+        public static User LoadById(Guid id)
         {
             try
             {
@@ -257,7 +246,7 @@ namespace TSF.DVDCentral.BL
                         return new User
                         {
                             Id = entity.Id,
-                            UserId = entity.UserId,
+                            UserName = entity.UserName,
                             FirstName = entity.FirstName,
                             LastName = entity.LastName,
                             Password = entity.Password

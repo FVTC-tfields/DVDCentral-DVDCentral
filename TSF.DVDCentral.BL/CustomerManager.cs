@@ -1,23 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
-
-namespace TSF.DVDCentral.BL
+﻿namespace TSF.DVDCentral.BL
 {
     public static class CustomerManager
     {
         public static int Insert(string firstname,
                                  string lastname,
-                                 ref int id,
-                                 int userid,
+                                 Guid id,
+                                 Guid userid,
                                  string address,
                                  string city,
                                  string state,
@@ -74,7 +62,7 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblCustomers.Any() ? dc.tblCustomers.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.FirstName = customer.FirstName;
                     entity.LastName = customer.LastName;
                     entity.UserId = customer.UserId;
@@ -145,7 +133,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int id, bool rollback = false)
+        public static int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -179,7 +167,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Customer LoadById(int id)
+        public static Customer LoadById(Guid id)
         {
             try
             {
@@ -217,7 +205,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Customer? LoadByUserId(int userId)
+        public static Customer? LoadByUserId(Guid userId)
         {
             try
             {

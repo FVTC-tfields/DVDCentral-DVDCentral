@@ -10,10 +10,10 @@ namespace TSF.DVDCentral.BL.Models
 {
     public class Order
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("Customer Id")]
-        public int CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
 
         [DisplayName("Customer Name")]
         public string CustomerName { get; set; }
@@ -34,7 +34,7 @@ namespace TSF.DVDCentral.BL.Models
         public DateTime ShipDate { get; set; }
 
         [DisplayName("User Id")]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public decimal SubTotal { get; set; }
 

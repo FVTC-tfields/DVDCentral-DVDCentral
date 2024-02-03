@@ -9,15 +9,15 @@ namespace TSF.DVDCentral.BL.Models
 {
     public class OrderItem
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("Order Id")]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
         public int Quantity { get; set; }
 
         [DisplayName("Movie Id")]
-        public int MovieId { get; set; }
+        public Guid MovieId { get; set; }
 
         public float Cost { get; set; }
         

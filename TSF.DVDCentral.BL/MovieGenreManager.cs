@@ -1,20 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
+﻿using System.Xml.Linq;
 
 namespace TSF.DVDCentral.BL
 {
     public static class MovieGenreManager
     {
-        public static int Insert(int movieId,
-                                 ref int id,
-                                 int genreId,
+        public static int Insert(Guid movieId,
+                                 Guid id,
+                                 Guid genreId,
                                  bool rollback = false)
         {
             try
@@ -36,7 +28,7 @@ namespace TSF.DVDCentral.BL
                     //    entity.Id = 1;
                     //}
 
-                    entity.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
+                    entity.Id = Guid.NewGuid();
                     entity.MovieId = movieId;
                     entity.GenreId = genreId;
 
@@ -126,7 +118,7 @@ namespace TSF.DVDCentral.BL
         //    }
         //}
 
-        public static int Update(int movieGenreId, int movieId, int genreId, bool rollback = false)
+        public static int Update(Guid movieGenreId, Guid movieId, Guid genreId, bool rollback = false)
         {
             try
             {
@@ -161,7 +153,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(int movieGenreId, bool rollback = false)
+        public static int Delete(Guid movieGenreId, bool rollback = false)
         {
             try
             {
