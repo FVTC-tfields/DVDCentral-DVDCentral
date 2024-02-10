@@ -1,66 +1,52 @@
-﻿namespace TSF.DVDCentral.BL
+﻿
+using BDF.DVDCentral.BL.Models;
+using Microsoft.Extensions.Options;
+using TSF.DVDCentral.BL;
+
+namespace BDF.DVDCentral.BL
 {
-    public class ShoppingCartManager
+    public class ShoppingCartManager : GenericManager<tblCart>
     {
-        public static void Add(ShoppingCart cart, Movie movie)
-        {
-            if (cart != null) { cart.Items.Add(movie); }
-        }
+        public ShoppingCartManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
 
-        public static void Remove(ShoppingCart cart, Movie movie)
+        public int Checkout(ShoppingCart cart, bool rollback = false)
         {
-            if (cart != null) { cart.Items.Remove(movie); }
-        }
+            Order order = new Order();
+            order.CustomerId = cart.CustomerId;
+            order.OrderDate = DateTime.Now;
+            order.UserId = cart.UserId;
+            order.ShipDate = DateTime.Now.AddDays(3);
 
-        public static void Checkout(ShoppingCart cart, Guid userId, Guid customerId)
-        {
-            try
+            foreach (var item in cart.Items)
             {
-                if (cart.Items.Count > 0)
+                order.OrderItems.Add(new OrderItem
                 {
-                    Order order = new Order();
-                    order.UserId = userId;
-                    order.OrderDate = DateTime.Now;
-                    order.ShipDate = DateTime.Now.AddDays(3);
-                    order.CustomerId = customerId;
-
-                    foreach (Movie item in cart.Items)
-                    {
-                        OrderItem orderItem = new OrderItem();
-                        orderItem.MovieId = item.Id;
-                        orderItem.OrderId = order.Id;
-                        orderItem.Quantity = 1;
-                        orderItem.Cost = item.Cost;
-
-                        order.OrderItems.Add(orderItem);
-                    }
-
-                    OrderManager.Insert(order);
-
-                    cart.Items = null;
-                }
+                    Cost = item.Cost,
+                    MovieId = item.Id,
+                    Quantity = item.Quantity
+                });
             }
-            catch (Exception ex)
-            {
+            return new OrderManager(options).Insert(order, rollback);
+        }
 
-                throw ex;
-            }
-            
-            // Make a new order
-            // Set the Order fields as needed.
+        public void Add(ShoppingCart cart, Movie movie)
+        {
+            if (!cart.Items.Any(n => n.Id == movie.Id))
+                cart.Add(movie);
+            else
+                cart.Items.Where(n => n.Id == movie.Id).FirstOrDefault().Quantity++;
+        }
 
-            // foreach(Movie item in cart.Items)
-
-            // Make a new orderitem
-            // Set the orderitem fields from the item
-            // order.OrderItems.Add(orderItem)
-
-            // OrderManager.Insert(order)
-
-            // Decrement the tblMovie.InStkQty appropriately
-
-            cart = new ShoppingCart();
+        public void AssignToCustomer()
+        {
 
         }
+
+
+        public void Remove(ShoppingCart cart, Movie movie)
+        {
+            cart.Remove(movie);
+        }
+
     }
 }

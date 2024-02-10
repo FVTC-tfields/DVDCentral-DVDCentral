@@ -1,8 +1,10 @@
 ﻿namespace TSF.DVDCentral.BL
 {
-    public static class CustomerManager
+    public class CustomerManager : GenericManager<tblCustomer>
     {
-        public static int Insert(string firstname,
+        public CustomerManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(string firstname,
                                  string lastname,
                                  Guid id,
                                  Guid userid,
@@ -41,7 +43,7 @@
             }
         }
 
-        public static int Insert(Customer customer, bool rollback = false)
+        public int Insert(Customer customer, bool rollback = false)
         {
             try
             {
@@ -92,7 +94,7 @@
             }
         }
 
-        public static int Update(Customer customer, bool rollback = false)
+        public int Update(Customer customer, bool rollback = false)
         {
             try
             {
@@ -133,7 +135,7 @@
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -167,7 +169,7 @@
             }
         }
 
-        public static Customer LoadById(Guid id)
+        public Customer LoadById(Guid id)
         {
             try
             {
@@ -205,7 +207,7 @@
             }
         }
 
-        public static Customer? LoadByUserId(Guid userId)
+        public Customer? LoadByUserId(Guid userId)
         {
             try
             {
@@ -242,7 +244,7 @@
             }
         }
 
-        public static List<Customer> Load()
+        public List<Customer> Load()
         {
             try
             {

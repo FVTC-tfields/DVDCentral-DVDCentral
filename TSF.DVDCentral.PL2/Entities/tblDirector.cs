@@ -5,15 +5,13 @@ using System.Collections.Generic;
 
 namespace TSF.DVDCentral.PL2.Entities
 {
-
+    // Add a comment
     public class tblDirector : IEntity
     {
         public Guid Id { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
+
         public virtual ICollection<tblMovie> tblMovies { get; set; }
     }
-
 }

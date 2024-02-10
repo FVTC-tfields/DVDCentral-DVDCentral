@@ -2,9 +2,11 @@
 
 namespace TSF.DVDCentral.BL
 {
-    public static class RatingManager
+    public class RatingManager : GenericManager<tblRating>
     {
-        public static int Insert(string description,
+        public RatingManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(string description,
                                  Guid id,
                                  bool rollback = false)
         {
@@ -29,7 +31,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Insert(Rating rating, bool rollback = false)
+        public int Insert(Rating rating, bool rollback = false)
         {
             try
             {
@@ -73,7 +75,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Update(Rating rating, bool rollback = false)
+        public int Update(Rating rating, bool rollback = false)
         {
             try
             {
@@ -107,7 +109,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -141,7 +143,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Rating LoadById(Guid id)
+        public Rating LoadById(Guid id)
         {
             try
             {
@@ -172,7 +174,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Rating> Load()
+        public List<Rating> Load()
         {
             try
             {

@@ -2,9 +2,11 @@
 
 namespace TSF.DVDCentral.BL
 {
-    public static class OrderItemManager
+    public class OrderItemManager : GenericManager<tblOrderItem>
     {
-        public static int Insert(Guid orderid,
+        public OrderItemManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(Guid orderid,
                                  Guid id,
                                  int quantity,
                                  Guid movieid,
@@ -35,7 +37,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Insert(OrderItem orderitem, bool rollback = false)
+        public int Insert(OrderItem orderitem, bool rollback = false)
         {
             try
             {
@@ -81,7 +83,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Update(OrderItem orderitem, bool rollback = false)
+        public int Update(OrderItem orderitem, bool rollback = false)
         {
             try
             {
@@ -117,7 +119,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -151,7 +153,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static OrderItem LoadById(Guid id)
+        public OrderItem LoadById(Guid id)
         {
             try
             {
@@ -184,7 +186,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<OrderItem> LoadByOrderId(Guid orderId)
+        public List<OrderItem> LoadByOrderId(Guid orderId)
         {
             try
             {
@@ -222,7 +224,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<OrderItem> Load()
+        public List<OrderItem> Load()
         {
             try
             {

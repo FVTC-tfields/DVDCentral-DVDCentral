@@ -9,19 +9,19 @@
         }
 
 
-        public int Insert(Director director, bool rollback = false)
-        {
-            try
-            {
-                tblDirector row = new tblDirector { FirstName = director.FirstName, LastName = director.LastName };
-                director.Id = row.Id;
-                return base.Insert(row, rollback);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //public int Insert(Director director, bool rollback = false)
+        //{
+        //    try
+        //    {
+        //        tblDirector row = new tblDirector { FirstName = director.FirstName, LastName = director.LastName };
+        //        director.Id = row.Id;
+        //        return base.Insert(row, rollback);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         public int Update(Director director, bool rollback = false)
         {
             try

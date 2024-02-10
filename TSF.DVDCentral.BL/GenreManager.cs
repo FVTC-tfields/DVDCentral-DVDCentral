@@ -1,8 +1,10 @@
 ﻿namespace TSF.DVDCentral.BL
 {
-    public static class GenreManager
+    public class GenreManager : GenericManager<tblGenre>
     {
-        public static int Insert(string description,
+        public GenreManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(string description,
                                  Guid id,
                                  bool rollback = false)
         {
@@ -27,7 +29,7 @@
             }
         }
 
-        public static int Insert(Genre genre, bool rollback = false)
+        public int Insert(Genre genre, bool rollback = false)
         {
             try
             {
@@ -71,7 +73,7 @@
             }
         }
 
-        public static int Update(Genre genre, bool rollback = false)
+        public int Update(Genre genre, bool rollback = false)
         {
             try
             {
@@ -105,7 +107,7 @@
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -139,7 +141,7 @@
             }
         }
 
-        public static Genre LoadById(Guid id)
+        public Genre LoadById(Guid id)
         {
             try
             {
@@ -170,7 +172,7 @@
             }
         }
 
-        public static List<Genre> Load()
+        public List<Genre> Load()
         {
             try
             {
@@ -199,6 +201,21 @@
 
                 throw;
             }
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string? ToString()
+        {
+            return base.ToString();
         }
     }
 }

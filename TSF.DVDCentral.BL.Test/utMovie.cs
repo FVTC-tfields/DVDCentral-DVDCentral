@@ -1,66 +1,61 @@
-﻿using System.Xml.Linq;
-using TSF.DVDCentral.BL.Models;
-
-namespace TSF.DVDCentral.BL.Test
+﻿namespace TSF.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utMovie
+    public class utMovie : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, MovieManager.Load().Count);
+            List<Movie> movies = new MovieManager(options).Load();
+            int expected = 7;
+
+            Assert.AreEqual(expected, movies.Count);
         }
 
         [TestMethod]
-        public void InsertTest1()
+        public void InsertTest()
         {
-            int id = 0;
-            int results = MovieManager.Insert("Test", "Test", ref id, 0, 0, 0, 0, 0, "Test",  true);
-            Assert.AreEqual(1, results);
-        }
-
-        [TestMethod]
-        public void InsertTest2()
-        {
-            int id = 0;
             Movie movie = new Movie
             {
-                Title = "Test",
-                Description = "Test",
-                FormatId = 144,
-                DirectorId = 133,
-                RatingId = 122,
-                Cost = 1,
-                InStkQty = 111,
-                ImagePath = "Test"
+                Id = Guid.NewGuid(),
+                Title = "XXXXX",
+                Description = "XXXXX",
+                Cost = 9,
+                RatingId = new RatingManager(options).Load().FirstOrDefault().Id,
+                FormatId = new FormatManager(options).Load().FirstOrDefault().Id,
+                DirectorId = new DirectorManager(options).Load().FirstOrDefault().Id,
+                Quantity = 0,
+                ImagePath = "XXXXXXX"
             };
 
-            int results = MovieManager.Insert(movie, true);
-            Assert.AreEqual(1, results);
+            int result = new MovieManager(options).Insert(movie, true);
+            Assert.IsTrue(result > 0);
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            Movie movie = MovieManager.LoadById(3);
-            movie.Title = "Test";
-            movie.Description = "Test";
-            movie.FormatId = 144;
-            movie.DirectorId = 133;
-            movie.RatingId = 122;
-            movie.Cost = 1;
-            movie.InStkQty = 111;
-            movie.ImagePath = "Test";
-            int results = MovieManager.Update(movie, true);
-            Assert.AreEqual(1, results);
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+            movie.Title = "test";
+
+            Assert.IsTrue(new MovieManager(options).Update(movie, true) > 0);
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            int results = MovieManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+
+            Assert.IsTrue(new MovieManager(options).Delete(movie.Id, true) > 0);
         }
+
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+            Movie movie = new MovieManager(options).Load().FirstOrDefault();
+            Assert.AreEqual(new MovieManager(options).LoadById(movie.Id).Id, movie.Id);
+        }
+
+
     }
 }

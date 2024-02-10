@@ -1,31 +1,32 @@
-﻿using TSF.DVDCentral.BL.Models;
-
-namespace TSF.DVDCentral.BL.Test
+﻿namespace TSF.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utMovieGenre
+    public class utMovieGenre : utBase
     {
+        public Guid id { get; private set; }
 
         [TestMethod]
-        public void InsertTest1()
+        public void InsertTest()
         {
-            int id = 0;
-            int results = MovieGenreManager.Insert(0, ref id, 0, true);
-            Assert.AreEqual(1, results);
+            Guid movieId = new MovieManager(options).Load().FirstOrDefault().Id;
+            Guid genreId = new GenreManager(options).Load().FirstOrDefault().Id;
+            int result = new MovieGenreManager(options).Insert(movieId, id, genreId, true);
+            Assert.IsTrue(result > 0);
         }
 
-        [TestMethod]
-        public void UpdateTest()
-        {
-            int results = MovieGenreManager.Update(3, 1, 1, true);
-            Assert.AreEqual(1, results);
-        }
+        //[TestMethod]
+        //public void DeleteTest()
+        //{
+        //    int movieGenreId = new MovieGenreManager(options).Load().FirstOrDefault().Id; 
+        //    Assert.IsTrue(MovieGenreManager.Delete(movieGenreId, true) > 0);
+        //}
 
         [TestMethod]
-        public void DeleteTest()
+        public void DeleteTest2()
         {
-            int results = MovieGenreManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            tblMovieGenre row = new MovieGenreManager(options).Load().FirstOrDefault();
+            Assert.IsTrue(new MovieGenreManager(options).Delete(row.MovieId, row.GenreId, true) > 0);
         }
+
     }
 }

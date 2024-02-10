@@ -2,9 +2,11 @@
 
 namespace TSF.DVDCentral.BL
 {
-    public static class OrderManager
+    public class OrderManager : GenericManager<tblOrder>
     {
-        public static int Insert(Guid orderid,
+        public OrderManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(Guid orderid,
                                  Guid userid,
                                  Guid id,
                                  bool rollback = false)
@@ -33,7 +35,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Insert(Order order, bool rollback = false)
+        public int Insert(Order order, bool rollback = false)
         {
             try
             {
@@ -83,7 +85,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Update(Order order, bool rollback = false)
+        public int Update(Order order, bool rollback = false)
         {
             try
             {
@@ -120,7 +122,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -154,7 +156,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Order LoadById(Guid id)
+        public Order LoadById(Guid id, OrderItemManager orderItemManager)
         {
             try
             {
@@ -166,7 +168,7 @@ namespace TSF.DVDCentral.BL
                     {
                         tblCustomer customerEntity = dc.tblCustomers.FirstOrDefault(s => s.Id == entity.CustomerId);
                         tblUser userEntity = dc.tblUsers.FirstOrDefault(s => s.Id == entity.UserId);
-                        List<OrderItem> orderItems = OrderItemManager.LoadByOrderId(id);
+                        List<OrderItem> orderItems = orderItemManager.LoadByOrderId(id);
 
                         decimal subtotal = 0m;
                         foreach (var orderItem in  orderItems)
@@ -212,7 +214,19 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load(Guid? customerId = null)
+        public List<Order> LoadByCustomerId(Guid customerId)
+        {
+            try
+            {
+                return Load(customerId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Order> Load(Guid? customerId = null)
         {
             try
             {

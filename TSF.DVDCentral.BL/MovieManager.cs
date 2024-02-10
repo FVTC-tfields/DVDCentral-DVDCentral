@@ -2,9 +2,11 @@
 
 namespace TSF.DVDCentral.BL
 {
-    public static class MovieManager
+    public class MovieManager : GenericManager<tblMovie>
     {
-        public static int Insert(string title,
+        public MovieManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(string title,
                                  string description,
                                  Guid id,
                                  Guid formatid,
@@ -43,7 +45,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Insert(Movie movie, bool rollback = false)
+        public int Insert(Movie movie, bool rollback = false)
         {
             try
             {
@@ -94,7 +96,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Update(Movie movie, bool rollback = false)
+        public int Update(Movie movie, bool rollback = false)
         {
             try
             {
@@ -135,7 +137,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -169,7 +171,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static Movie LoadById(Guid id)
+        public Movie LoadById(Guid id)
         {
             try
             {
@@ -207,7 +209,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static List<Movie> Load(Guid? genreId = null)
+        public List<Movie> Load(Guid? genreId = null)
         {
             try
             {

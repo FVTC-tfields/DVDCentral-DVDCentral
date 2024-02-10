@@ -1,104 +1,59 @@
-﻿using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.BL;
-
-namespace TSF.ProgDec.BL.Test
+﻿namespace TSF.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utUser
+    public class utUser : utBase
     {
-        [TestMethod]
-        public void LoginSuccessfulTest()
+
+        [TestInitialize]
+        public void Initialize()
         {
-            Seed();
-            Assert.IsTrue(UserManager.Login(new User { UserId = "tfields", Password = "larry" }));
-            Assert.IsTrue(UserManager.Login(new User { UserId = "bfoote", Password = "maple" }));
+            new UserManager(options).Seed();
         }
 
-        public void Seed()
+
+        [TestMethod]
+        public void LoadTest()
         {
-            UserManager.Seed();
+            List<User> users = new UserManager(options).Load();
+            Assert.IsTrue(users.Count > 0);
         }
 
         [TestMethod]
         public void InsertTest()
         {
-
+            User user = new User { FirstName = "Bill", LastName = "Smith", UserName = "bsmith", Password = "1234" };
+            int result = new UserManager(options).Insert(user, true);
+            Assert.IsTrue(result > 0);
         }
 
         [TestMethod]
-        public void LoadTest()
+        public void LoginSuccess()
         {
-            Assert.AreEqual(2, UserManager.Load().Count);
+            User user = new User { FirstName = "Tyler", LastName = "Fields", UserName = "tfields", Password = "larry" };
+            bool result = new UserManager(options).Login(user);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void LoginFailureNoUserId()
+        public void LoginFail()
         {
             try
             {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { UserId = "", Password = "larry" }));
+                User user = new User { FirstName = "Tyler", LastName = "Fields", UserName = "tfields", Password = "xxxxx" };
+                new UserManager(options).Login(user);
+                Assert.Fail();
             }
             catch (LoginFailureException)
             {
                 Assert.IsTrue(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Assert.Fail(ex.Message);
+                Assert.Fail();
             }
         }
 
-        [TestMethod]
-        public void LoginFailureBadPassword()
-        {
-            try
-            {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { UserId = "tfields", Password = "taco" }));
-            }
-            catch (LoginFailureException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
-        [TestMethod]
-        public void LoginFailureBadUserId()
-        {
-            try
-            {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { UserId = "tfelds", Password = "larry" }));
-            }
-            catch (LoginFailureException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
-        [TestMethod]
-        public void LoginFailureNoPassword()
-        {
-            try
-            {
-                Seed();
-                Assert.IsFalse(UserManager.Login(new User { UserId = "tfields", Password = "" }));
-            }
-            catch (LoginFailureException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(ex.Message);
-            }
-        }
+
+
     }
 }

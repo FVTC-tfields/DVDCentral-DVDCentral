@@ -40,7 +40,7 @@
             }
         }
 
-        public int Insert(T entity, bool rollback = false)
+        public int Insert(Guid movieId, T entity, bool rollback = false)
         {
             try
             {

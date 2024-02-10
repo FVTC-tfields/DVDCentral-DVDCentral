@@ -16,7 +16,7 @@ namespace TSF.DVDCentral.UI.Controllers
 
         public IActionResult Details(int id)
         {
-            return View(OrderManager.LoadById(id));
+            return View(OrderManager.LoadById(id, orderItemManager: OrderItemManager));
         }
 
         public IActionResult Create()
@@ -47,7 +47,7 @@ namespace TSF.DVDCentral.UI.Controllers
         {
             ViewBag.Title = "Edit a Program";
             if (Authenticate.IsAuthenticated(HttpContext))
-                return View(OrderManager.LoadById(id));
+                return View(OrderManager.LoadById(id, orderItemManager: OrderItemManager));
             else
                 return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
         }
@@ -69,7 +69,7 @@ namespace TSF.DVDCentral.UI.Controllers
 
         public IActionResult Delete(int id)
         {
-            return View(OrderManager.LoadById(id));
+            return View(OrderManager.LoadById(id, orderItemManager: OrderItemManager));
         }
 
         [HttpPost]

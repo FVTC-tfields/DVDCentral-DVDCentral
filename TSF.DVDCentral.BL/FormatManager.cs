@@ -1,8 +1,10 @@
 ﻿namespace TSF.DVDCentral.BL
 {
-    public static class FormatManager
+    public class FormatManager : GenericManager<tblFormat>
     {
-        public static int Insert(string description,
+        public FormatManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(string description,
                                  Guid id,
                                  bool rollback = false)
         {
@@ -27,7 +29,7 @@
             }
         }
 
-        public static int Insert(Format format, bool rollback = false)
+        public int Insert(Format format, bool rollback = false)
         {
             try
             {
@@ -71,7 +73,7 @@
             }
         }
 
-        public static int Update(Format format, bool rollback = false)
+        public int Update(Format format, bool rollback = false)
         {
             try
             {
@@ -105,7 +107,7 @@
             }
         }
 
-        public static int Delete(Guid id, bool rollback = false)
+        public int Delete(Guid id, bool rollback = false)
         {
             try
             {
@@ -139,7 +141,7 @@
             }
         }
 
-        public static Format LoadById(Guid id)
+        public Format LoadById(Guid id)
         {
             try
             {
@@ -170,7 +172,7 @@
             }
         }
 
-        public static List<Format> Load()
+        public List<Format> Load()
         {
             try
             {

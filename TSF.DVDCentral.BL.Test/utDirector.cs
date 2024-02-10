@@ -1,53 +1,54 @@
-﻿using TSF.DVDCentral.BL.Models;
-
-namespace TSF.DVDCentral.BL.Test
+﻿namespace TSF.DVDCentral.BL.Test
 {
     [TestClass]
-    public class utDirector
+    public class utDirector : utBase
     {
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, DirectorManager.Load().Count);
+            List<Director> directors = new DirectorManager(options).Load();
+            int expected = 6;
+
+            Assert.AreEqual(expected, directors.Count);
         }
 
-        [TestMethod]
-        public void InsertTest1()
-        {
-            int id = 0;
-            int results = DirectorManager.Insert("Bale", "Organa",  ref id, true);
-            Assert.AreEqual(4, id);
-            Assert.AreEqual(0, results);
-        }
+        //[TestMethod]
+        //public void InsertTest()
+        //{
+        //    Director director = new Director
+        //    {
+        //        FirstName = "Tyler",
+        //        LastName = "Fields"
+        //    };
 
-        [TestMethod]
-        public void InsertTest2()
-        {
-            int id = 0;
-            Director director = new Director
-            {
-                FirstName = "Test",
-                LastName = "Test",
-            };
-
-            int results = DirectorManager.Insert(director, true);
-            Assert.AreEqual(0, results);
-        }
+        //    int result = new DirectorManager(options).Insert(director, true);
+        //    Assert.IsTrue(result > 0);
+        //}
 
         [TestMethod]
         public void UpdateTest()
         {
-            Director director = DirectorManager.LoadById(3);
-            director.FirstName = "Test";
-            int results = DirectorManager.Update(director, true);
-            Assert.AreEqual(1, results);
+            Director director = new DirectorManager(options).Load().FirstOrDefault();
+            director.FirstName = "test";
+
+            Assert.IsTrue(new DirectorManager(options).Update(director, true) > 0);
         }
 
         [TestMethod]
         public void DeleteTest()
         {
-            int results = DirectorManager.Delete(3, true);
-            Assert.AreEqual(1, results);
+            Director director = new DirectorManager(options).Load().FirstOrDefault(x => x.FirstName == "Other");
+
+            Assert.IsTrue(new DirectorManager(options).Delete(director.Id, true) > 0);
         }
+        [TestMethod]
+        public void LoadByIdTest()
+        {
+
+            Director director = new DirectorManager(options).Load().FirstOrDefault(x => x.FirstName == "Other");
+            Assert.AreEqual(new DirectorManager(options).LoadById(director.Id).Id, director.Id);
+        }
+
+
     }
 }

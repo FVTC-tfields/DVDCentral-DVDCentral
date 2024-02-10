@@ -2,9 +2,11 @@
 
 namespace TSF.DVDCentral.BL
 {
-    public static class MovieGenreManager
+    public class MovieGenreManager : GenericManager<tblMovieGenre>
     {
-        public static int Insert(Guid movieId,
+        public MovieGenreManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public int Insert(Guid movieId,
                                  Guid id,
                                  Guid genreId,
                                  bool rollback = false)
@@ -118,7 +120,7 @@ namespace TSF.DVDCentral.BL
         //    }
         //}
 
-        public static int Update(Guid movieGenreId, Guid movieId, Guid genreId, bool rollback = false)
+        public int Update(Guid movieGenreId, Guid movieId, Guid genreId, bool rollback = false)
         {
             try
             {
@@ -153,7 +155,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Delete(Guid movieGenreId, bool rollback = false)
+        public int Delete(Guid movieGenreId, Guid genreId, bool rollback = false)
         {
             try
             {

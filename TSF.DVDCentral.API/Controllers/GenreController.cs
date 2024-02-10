@@ -15,7 +15,7 @@ namespace TSF.DVDCentral.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public BL.Models.Genre Get(int id)
+        public BL.Models.Genre Get(Guid id)
         {
             return GenreManager.LoadById(id);
         }

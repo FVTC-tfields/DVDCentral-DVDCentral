@@ -15,9 +15,11 @@ namespace TSF.DVDCentral.BL
         }
     }
 
-    public static class UserManager
+    public class UserManager : GenericManager<tblUser>
     {
-        public static string GetHash(string password)
+        public UserManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+
+        public string GetHash(string password)
         {
             using (var hasher = SHA1.Create())
             {
@@ -26,7 +28,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int DeleteAll()
+        public int DeleteAll()
         {
             try
             {
@@ -43,7 +45,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static int Insert(User user, bool rollback = false)
+        public int Insert(User user, bool rollback = false)
         {
             try
             {
@@ -79,7 +81,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static bool Login(User user)
+        public bool Login(User user)
         {
             try
             {
@@ -132,7 +134,7 @@ namespace TSF.DVDCentral.BL
             }
         }
 
-        public static void Seed()
+        public void Seed()
         {
             using (DVDCentralEntities dc = new DVDCentralEntities())
             {
@@ -158,7 +160,7 @@ namespace TSF.DVDCentral.BL
                 }
             }
         }
-        public static int Update(User user, bool rollback = false)
+        public int Update(User user, bool rollback = false)
         {
             try
             {
@@ -194,7 +196,7 @@ namespace TSF.DVDCentral.BL
                 throw;
             }
         }
-        public static List<User> Load()
+        public List<User> Load()
         {
             try
             {
@@ -233,7 +235,7 @@ namespace TSF.DVDCentral.BL
                 throw;
             }
         }
-        public static User LoadById(Guid id)
+        public User LoadById(Guid id)
         {
             try
             {
