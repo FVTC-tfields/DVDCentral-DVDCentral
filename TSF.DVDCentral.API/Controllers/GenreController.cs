@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TSF.DVDCentral.BL;
+using TSF.DVDCentral.BL.Models;
+using TSF.DVDCentral.PL;
 
 namespace TSF.DVDCentral.API.Controllers
 {
@@ -8,24 +11,35 @@ namespace TSF.DVDCentral.API.Controllers
     [ApiController]
     public class GenreController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<BL.Models.Genre> Get()
+        private readonly DbContextOptions<DVDCentralEntities> options;
+        private readonly ILogger<GenreController> logger;
+
+        public GenreController(ILogger<GenreController> logger,
+                               DbContextOptions<DVDCentralEntities> options)
         {
-            return GenreManager.Load();
+            this.options = options;
+            this.logger = logger;
+        }
+
+
+        [HttpGet]
+        public IEnumerable<Genre> Get()
+        {
+            return new GenreManager(options).Load();
         }
 
         [HttpGet("{id}")]
         public BL.Models.Genre Get(Guid id)
         {
-            return GenreManager.LoadById(id);
+            return new GenreManager(options).LoadById(id);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] BL.Models.Genre genre)
+        public IActionResult Post([FromBody] Genre genre)
         {
             try
             {
-                int results = GenreManager.Insert(genre);
+                int results = new GenreManager(options).Insert(genre);
                 return Ok(results);
             }
             catch (Exception ex)
@@ -39,7 +53,7 @@ namespace TSF.DVDCentral.API.Controllers
         {
             try
             {
-                int results = GenreManager.Update(genre);
+                int results = new GenreManager(options).Update(genre);
                 return Ok(results);
             }
             catch (Exception ex)

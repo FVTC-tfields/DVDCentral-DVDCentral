@@ -40,7 +40,7 @@ namespace TSF.DVDCentral.BL
             try
             {
                 int results = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
@@ -90,7 +90,7 @@ namespace TSF.DVDCentral.BL
             try
             {
                 int results = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
@@ -127,7 +127,7 @@ namespace TSF.DVDCentral.BL
             try
             {
                 int results = 0;
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
@@ -160,7 +160,7 @@ namespace TSF.DVDCentral.BL
         {
             try
             {
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == id);
 
@@ -232,7 +232,7 @@ namespace TSF.DVDCentral.BL
             {
                 List<Order> list = new List<Order>();
 
-                using (DVDCentralEntities dc = new DVDCentralEntities())
+                using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
                     (from s in dc.tblOrders
                      where s.CustomerId == customerId || customerId == null
