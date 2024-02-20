@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.ConsoleApp",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.API", "TSF.DVDCentral.API\TSF.DVDCentral.API.csproj", "{EE667211-6A00-4625-B0BF-62B39B90185F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSF.DVDCentral.API.Test", "TSF.DVDCentral.API.Test\TSF.DVDCentral.API.Test.csproj", "{1E77B500-665B-42CB-9E48-15D92900451E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{EE667211-6A00-4625-B0BF-62B39B90185F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE667211-6A00-4625-B0BF-62B39B90185F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE667211-6A00-4625-B0BF-62B39B90185F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E77B500-665B-42CB-9E48-15D92900451E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E77B500-665B-42CB-9E48-15D92900451E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E77B500-665B-42CB-9E48-15D92900451E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E77B500-665B-42CB-9E48-15D92900451E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
