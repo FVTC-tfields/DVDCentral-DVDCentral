@@ -32,6 +32,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.API", "TSF.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.DVDCentral.API.Test", "TSF.DVDCentral.API.Test\TSF.DVDCentral.API.Test.csproj", "{1E77B500-665B-42CB-9E48-15D92900451E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDF.Bingo.UI", "..\..\..\Downloads\BDF.Bingo.UI\BDF.Bingo.UI\BDF.Bingo.UI.csproj", "{BD2A59E6-549D-444A-944A-F62066B93520}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TSF.WebApp2", "TSF.WebApp2\TSF.WebApp2.csproj", "{F36EC3C0-AFB1-4C1A-B769-B29578F965D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,14 @@ Global
 		{1E77B500-665B-42CB-9E48-15D92900451E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E77B500-665B-42CB-9E48-15D92900451E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E77B500-665B-42CB-9E48-15D92900451E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2A59E6-549D-444A-944A-F62066B93520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2A59E6-549D-444A-944A-F62066B93520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2A59E6-549D-444A-944A-F62066B93520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2A59E6-549D-444A-944A-F62066B93520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F36EC3C0-AFB1-4C1A-B769-B29578F965D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F36EC3C0-AFB1-4C1A-B769-B29578F965D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F36EC3C0-AFB1-4C1A-B769-B29578F965D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F36EC3C0-AFB1-4C1A-B769-B29578F965D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

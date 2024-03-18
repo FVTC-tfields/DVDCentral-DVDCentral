@@ -1,4 +1,6 @@
-﻿namespace TSF.DVDCentral.PL2.Entities
+﻿using System;
+
+namespace TSF.DVDCentral.PL2.Entities
 {
     public interface IEntity
     {

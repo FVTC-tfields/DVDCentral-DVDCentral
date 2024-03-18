@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using TSF.DVDCentral.PL2.Entities;
 
 namespace TSF.DVDCentral.PL2.Data
