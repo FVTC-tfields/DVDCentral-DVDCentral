@@ -370,6 +370,10 @@ namespace TSF.DVDCentral.PL2.Data
                     .HasForeignKey(d => d.RatingId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_tblMovie_RatingId");
+
+                // Include SP entity
+                modelBuilder.Entity<spGetMoviesResult>().HasNoKey();
+
             });
 
 

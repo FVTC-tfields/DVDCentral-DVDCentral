@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TSF.DVDCentral.BL\TSF.DVDCentral.BL.csproj" />
+    <ProjectReference Include="..\TSF.DVDCentral.PL.Test\TSF.DVDCentral.PL.Test.csproj" />
   </ItemGroup>
 
 </Project>

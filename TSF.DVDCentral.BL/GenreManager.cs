@@ -172,7 +172,7 @@
             }
         }
 
-        public List<Genre> Load()
+        public List<Genre> Load(Guid id)
         {
             try
             {

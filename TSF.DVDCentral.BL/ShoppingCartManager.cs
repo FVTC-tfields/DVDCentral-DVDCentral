@@ -21,7 +21,7 @@ namespace BDF.DVDCentral.BL
             {
                 order.OrderItems.Add(new OrderItem
                 {
-                    Cost = item.Cost,
+                    Cost = (float)item.Cost,
                     MovieId = item.Id,
                     Quantity = item.Quantity
                 });

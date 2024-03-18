@@ -9,6 +9,7 @@
             this.options = options;
         }
 
+        public GenericManager() { }
 
         public List<T> Load()
         {
@@ -16,6 +17,40 @@
             {
                 return new DVDCentralEntities(options)
                     .Set<T>()
+                    .ToList<T>();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<T> Load(string storedproc)
+        {
+            try
+            {
+                return new DVDCentralEntities(options)
+                    .Set<T>()
+                    .FromSqlRaw($"exec {storedproc}")
+                    .ToList<T>();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<T> Load(string storedproc, string value)
+        {
+            try
+            {
+                return new DVDCentralEntities(options)
+                    .Set<T>()
+                    .FromSqlRaw($"exec {storedproc} {value}")
                     .ToList<T>();
 
             }
@@ -40,13 +75,21 @@
             }
         }
 
-        public int Insert(Guid movieId, T entity, bool rollback = false)
+        public int Insert(T entity, bool rollback = false)
         {
             try
             {
                 int results = 0;
                 using (DVDCentralEntities dc = new DVDCentralEntities(options))
                 {
+                    // Check if genre already exists - do not allow ....
+                    //bool inUse = dc.tblGenres.Any(e => e.Description.Trim().ToUpper() == entity.Description.Trim().ToUpper());
+
+                    //if (inUse && !rollback)
+                    //{
+                    //    throw new Exception("This entity already exists.");
+                    //}
+
                     IDbContextTransaction dbTransaction = null;
                     if (rollback) dbTransaction = dc.Database.BeginTransaction();
 
@@ -94,7 +137,6 @@
                 throw;
             }
         }
-
         public int Delete(Guid id, bool rollback = false)
         {
             try
@@ -129,9 +171,6 @@
             }
         }
 
-        internal int Insert(tblDirector row, bool rollback)
-        {
-            throw new NotImplementedException();
-        }
     }
+
 }

@@ -1,4 +1,5 @@
-﻿using TSF.DVDCentral.BL.Models;
+﻿using BDF.DVDCentral.BL.Models;
+using TSF.DVDCentral.BL.Models;
 
 namespace TSF.DVDCentral.UI.ViewModels
 {

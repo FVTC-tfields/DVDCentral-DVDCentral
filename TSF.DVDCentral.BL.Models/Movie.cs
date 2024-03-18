@@ -1,29 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TSF.DVDCentral.BL.Models
+using System.ComponentModel.DataAnnotations;
+using TSF.DVDCentral.BL.Models;
+namespace BDF.DVDCentral.BL.Models
 {
     public class Movie
     {
+        public Movie()
+        {
+            this.Genres = new List<Genre>();
+        }
+
         public Guid Id { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        [DisplayName("Format Id")]
-        public Guid FormatId { get; set; }
-        [DisplayName("Director Id")]
-        public Guid DirectorId { get; set; }
-        [DisplayName("Rating Id")]
+        [Required]
+        public string Title { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Required]
+        public double Cost { get; set; }
+
+        [Required]
         public Guid RatingId { get; set; }
-        public float Cost { get; set; }
-        [DisplayName("In Stock Quantity")]
-        public int InStkQty { get; set; }
-        [DisplayName("Image")]
-        public string? ImagePath { get; set; }
-        public List<Genre> Genres { get; set; } = new List<Genre>();
+
+        [Required]
+        public Guid FormatId { get; set; }
+
+        [Required]
+        public Guid DirectorId { get; set; }
+
+        [DisplayName("In Stk Qty")]
+        [Required]
         public int Quantity { get; set; }
+
+        [DisplayName("File Name")]
+        [Required(ErrorMessage = "Please select a movie poster file.")]
+        public string ImagePath { get; set; }
+
+
+        [DisplayName("Director")]
+        public string DirectorFullName { get; set; }
+        [DisplayName("Rating")]
+        public string RatingDescription { get; set; }
+        [DisplayName("Format")]
+        public string FormatDescription { get; set; }
+
+
+        public List<Genre> Genres { get; set; }
+
+        [DisplayName("Genres")]
+        public string GenreList
+        {
+            get
+            {
+                string genreList = string.Empty;
+                Genres.ForEach(a => genreList += a.Description + ", ");
+
+                if (!string.IsNullOrEmpty(genreList))
+                {
+                    genreList = genreList.Substring(0, genreList.Length - 2);
+
+                }
+                return genreList;
+            }
+
+        }
+
+
     }
+
 }
