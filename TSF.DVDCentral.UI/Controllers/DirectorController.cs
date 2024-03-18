@@ -6,8 +6,8 @@ using TSF.DVDCentral.UI.Models;
 
 namespace TSF.DVDCentral.UI.Controllers
 {
-    public class DirectorController : Controller
+    public class DirectorController : GenericController<Director>
     {
-       
+       public DirectorController(HttpClient client) : base(client) { }
     }
 }

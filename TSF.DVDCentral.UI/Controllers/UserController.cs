@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TSF.DVDCentral.BL;
 using TSF.DVDCentral.BL.Models;
-using TSF.DVDCentral.PL;
 using TSF.DVDCentral.UI.Extensions;
 
 namespace TSF.DVDCentral.UI.Controllers

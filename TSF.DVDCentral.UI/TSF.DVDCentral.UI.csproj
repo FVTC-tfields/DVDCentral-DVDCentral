@@ -1,18 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.2" NoWarn="NU1605" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="2.16.0" />
+		<PackageReference Include="Microsoft.Identity.Web.UI" Version="2.16.0" />
+		<PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.15.2" />
+	</ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Downloads\BDF.Utility\BDF.Utility\BDF.Utility.csproj" />
     <ProjectReference Include="..\TSF.DVDCentral.BL.Models\TSF.DVDCentral.BL.Models.csproj" />
-    <ProjectReference Include="..\TSF.DVDCentral.BL\TSF.DVDCentral.BL.csproj" />
   </ItemGroup>
 
 </Project>
