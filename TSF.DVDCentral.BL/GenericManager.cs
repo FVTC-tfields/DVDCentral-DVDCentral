@@ -129,5 +129,9 @@
             }
         }
 
+        internal int Insert(tblDirector row, bool rollback)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

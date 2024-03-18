@@ -12,18 +12,18 @@
             Assert.AreEqual(expected, directors.Count);
         }
 
-        //[TestMethod]
-        //public void InsertTest()
-        //{
-        //    Director director = new Director
-        //    {
-        //        FirstName = "Tyler",
-        //        LastName = "Fields"
-        //    };
+        [TestMethod]
+        public void InsertTest()
+        {
+            Director director = new Director
+            {
+                FirstName = "Tyler",
+                LastName = "Fields"
+            };
 
-        //    int result = new DirectorManager(options).Insert(director, true);
-        //    Assert.IsTrue(result > 0);
-        //}
+            int result = new DirectorManager(options).Insert(director, true);
+            Assert.IsTrue(result > 0);
+        }
 
         [TestMethod]
         public void UpdateTest()

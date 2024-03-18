@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using TSF.DVDCentral.PL;
+using System.Reflection;
+using TSF.DVDCentral.PL2.Data;
 
 public class Program
 {
@@ -12,7 +13,25 @@ public class Program
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "DVDCentral API",
+                Version = "v1",
+                Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                {
+                    Name = "Tyler Fields",
+                    Email = "300032214@fvtc.edu",
+                    Url = new Uri("https://www.fvtc.edu")
+                }
+            });
+
+            var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
+            c.IncludeXmlComments(xmlpath);
+
+        });
 
         // Add connection information
         builder.Services.AddDbContextPool<DVDCentralEntities>(options =>
@@ -24,7 +43,7 @@ public class Program
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment() || true)
         {
             app.UseSwagger();
             app.UseSwaggerUI();

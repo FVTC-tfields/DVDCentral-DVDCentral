@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-
-namespace TSF.DVDCentral.API.Test
+﻿namespace BDF.DVDCentral.API.Test
 {
     class APIProject : WebApplicationFactory<Program>
     {
@@ -37,7 +35,7 @@ namespace TSF.DVDCentral.API.Test
         }
 
         [TestMethod]
-        public async Task DeleteTestAsync1<T>(KeyValuePair<string, string> filter)
+        public async Task DeleteTestAsync<T>(KeyValuePair<string, string> filter)
         {
             Guid id = await GetId<T>(filter);
             bool rollback = true;

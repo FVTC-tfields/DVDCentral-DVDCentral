@@ -22,18 +22,33 @@ namespace TSF.DVDCentral.API.Controllers
             logger.LogWarning("I was here");
         }
 
+        /// <summary>
+        /// Returns a list of movies.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<Movie> Get()
         {
             return new MovieManager(options).Load();
         }
 
+        /// <summary>
+        /// Get a particular by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public Movie Get(Guid id)
         {
             return new MovieManager(options).LoadById(id);
         }
 
+        /// <summary>
+        /// Insert a movie
+        /// </summary>
+        /// <param name="movie"></param>
+        /// <param name="rollback"></param>
+        /// <returns>New Guid</returns>
         [HttpPost("{rollback?}")]
         public int Post([FromBody] Movie movie, bool rollback = false)
         {
@@ -47,6 +62,13 @@ namespace TSF.DVDCentral.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Update a movie
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="movie"></param>
+        /// <param name="rollback"></param>
+        /// <returns></returns>
         [HttpPut("{id}/{rollback?}")]
         public int Put(Guid id, [FromBody] Movie movie, bool rollback = false)
         {
@@ -60,6 +82,12 @@ namespace TSF.DVDCentral.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete a movie
+        /// </summary>
+        /// <param name="id">Movie Id</param>
+        /// <param name="rollback">Should be rollback the transaction</param>
+        /// <returns></returns>
         [HttpDelete("{id}/{rollback?}")]
         public int Delete(Guid id, bool rollback = false)
         {
