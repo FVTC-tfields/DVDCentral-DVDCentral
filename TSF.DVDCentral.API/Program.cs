@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using TSF.DVDCentral.API.Hubs;
 using TSF.DVDCentral.PL2.Data;
 
 public class Program
@@ -9,6 +10,12 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+
+        builder.Services.AddSignalR()
+            .AddJsonProtocol(options =>
+            {
+                options.PayloadSerializerOptions.PropertyNamingPolicy = null;
+            });
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -51,9 +58,17 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+
         app.UseAuthorization();
 
-        app.MapControllers();
+        //app.MapControllers();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHub<BingoHub>("/bingoHub");
+        });
 
         app.Run();
     }
