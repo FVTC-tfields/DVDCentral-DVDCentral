@@ -20,6 +20,8 @@ namespace TSF.DVDCentral.PL2.Entities
 
         public virtual tblMovie Movie { get; set; }
         public virtual tblOrder Order { get; set; }
+        public string SortField { get { return Movie.Title; } }
+
     }
 
 }

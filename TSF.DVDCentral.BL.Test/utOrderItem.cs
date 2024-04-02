@@ -1,4 +1,6 @@
-﻿namespace TSF.DVDCentral.BL.Test
+﻿using BDF.DVDCentral.BL;
+
+namespace TSF.DVDCentral.BL.Test
 {
     [TestClass]
     public class utOrderItem : utBase

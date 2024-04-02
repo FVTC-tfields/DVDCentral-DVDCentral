@@ -21,6 +21,9 @@ namespace TSF.DVDCentral.PL2.Entities
         public virtual ICollection<tblOrderItem> OrderItems { get; set; }
 
         public virtual tblCustomer Customer { get; set; }
+        public virtual tblUser User { get; set; }
+        public string SortField { get { return User.LastName; } }
+
     }
 
 }

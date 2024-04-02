@@ -17,6 +17,8 @@ namespace TSF.DVDCentral.PL2.Entities
         public string LastName { get; set; }
 
         public string Password { get; set; }
+        public string SortField { get { return LastName; } }
+
     }
 
 }

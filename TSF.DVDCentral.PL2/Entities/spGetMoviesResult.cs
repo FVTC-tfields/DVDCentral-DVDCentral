@@ -20,6 +20,8 @@ namespace TSF.DVDCentral.PL2.Entities
         public Guid RatingId { get; set; }
         public Guid FormatId { get; set; }
         public Guid DirectorId { get; set; }
+        public string SortField { get { return Title; } }
+
 
     }
 }

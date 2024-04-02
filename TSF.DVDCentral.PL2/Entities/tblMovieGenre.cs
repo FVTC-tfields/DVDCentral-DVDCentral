@@ -16,6 +16,8 @@ namespace TSF.DVDCentral.PL2.Entities
 
         public virtual tblGenre Genre { get; set; }
         public virtual tblMovie Movie { get; set; }
+        public string SortField { get { return Movie.Title; } }
+
 
     }
 
