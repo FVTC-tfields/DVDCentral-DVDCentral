@@ -1,8 +1,11 @@
-﻿namespace TSF.DVDCentral.BL
+﻿using Microsoft.Extensions.Logging;
+
+namespace TSF.DVDCentral.BL
 {
     public class GenreManager : GenericManager<tblGenre>
     {
         public GenreManager(DbContextOptions<DVDCentralEntities> options) : base(options) { }
+        public GenreManager(ILogger logger, DbContextOptions<DVDCentralEntities> options) : base(logger, options) { }
 
         public int Insert(string description,
                                  Guid id,

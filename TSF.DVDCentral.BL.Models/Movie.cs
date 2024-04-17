@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using TSF.DVDCentral.BL.Models;
-namespace BDF.DVDCentral.BL.Models
+namespace TSF.DVDCentral.BL.Models
 {
     public class Movie
     {

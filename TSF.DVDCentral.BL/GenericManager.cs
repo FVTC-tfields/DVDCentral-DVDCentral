@@ -1,20 +1,54 @@
-﻿namespace TSF.DVDCentral.BL
+﻿using Microsoft.Extensions.Logging;
+
+namespace TSF.DVDCentral.BL
 {
     public abstract class GenericManager<T> where T : class, IEntity
     {
         protected DbContextOptions<DVDCentralEntities> options;
+        protected readonly ILogger logger;
 
         public GenericManager(DbContextOptions<DVDCentralEntities> options)
         {
             this.options = options;
         }
 
+        public GenericManager(ILogger logger,
+                              DbContextOptions<DVDCentralEntities> options)
+        {
+            this.options = options;
+            this.logger = logger;
+        }
+
         public GenericManager() { }
+
+        public static string[,] ConvertData<U>(List<U> entities, string[] columns) where U : class
+        {
+            string[,] data = new string[entities.Count + 1, columns.Length];
+
+            int counter = 0;
+            for (int i = 0; i < columns.Length; i++)
+            {
+                data[counter, i] = columns[i];
+            }
+            counter++;
+
+
+            foreach (var entity in entities)
+            {
+                for (int i = 0; i < columns.Length; i++)
+                {
+                    data[counter, i] = entity.GetType().GetProperty(columns[i]).GetValue(entity, null).ToString();
+                }
+                counter++;
+            }
+            return data;
+        }
 
         public List<T> Load()
         {
             try
             {
+                if (logger != null) logger.LogWarning($"Get {typeof(T).Name}s");
                 return new DVDCentralEntities(options)
                     .Set<T>()
                     .ToList<T>()

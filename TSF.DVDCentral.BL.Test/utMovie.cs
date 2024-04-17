@@ -1,13 +1,21 @@
-﻿using BDF.DVDCentral.BL.Models;
-using TSF.DVDCentral.BL;
+﻿using TSF.DVDCentral.BL;
 using TSF.DVDCentral.BL.Test;
-using TSF.DVDCentral.PL.Test;
+using TSF.DVDCentral.Reporting;
 
 namespace BDF.DVDCentral.BL.Test
 {
     [TestClass]
     public class utMovie : utBase
     {
+        [TestMethod]
+        public void utReportTest()
+        {
+            var movies = new MovieManager(options).Load();
+            string[] columns = { "Title", "DirectorFullName", "FormatDescription", "RatingDescription", "Quantity" };
+            var data = MovieManager.ConvertData<Movie>(movies, columns);
+            Excel.Export("movies.xlsx", data);
+        }
+
         [TestMethod]
         public void LoadSPTest()
         {
